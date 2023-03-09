@@ -24,11 +24,12 @@ const GetAllPosts = gql`
 // getAllPosts();
 
 export default function Home() {
-  const [postList, setPostList] = useState(undefined);
+  const [postList, setPostList] = useState<any[]>([]);
 
   const getAllPosts = async () => {
-    const data = (await wpgraphql.request(GetAllPosts)) as any;
-    setPostList(data.posts?.nodes as any);
+    const data: any = await wpgraphql.request(GetAllPosts);
+
+    setPostList(data.posts.nodes);
   };
 
   useEffect(() => {
