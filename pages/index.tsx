@@ -24,20 +24,18 @@ const GetAllPosts = gql`
 // getAllPosts();
 
 export default function Home() {
-
   const [postList, setPostList] = useState(undefined);
-  
+
   const getAllPosts = async () => {
-    const { posts } = await wpgraphql.request(GetAllPosts);
-    
-    setPostList(posts.nodes);
+    const data = (await wpgraphql.request(GetAllPosts)) as any;
+    setPostList(data.posts?.nodes as any);
   };
 
   useEffect(() => {
     getAllPosts();
   }, []);
   console.log('postList', postList);
-  
+
   return (
     <>
       <Head>
@@ -47,17 +45,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        
-      {
-      postList === undefined
-      ? <p>loading</p>
-      : postList.map(item => (
-          <div className="product-item" key={item.title}>
-            <div>
-              {item.title}
+        {postList === undefined ? (
+          <p>loading</p>
+        ) : (
+          postList.map((item) => (
+            <div className="product-item" key={item.title}>
+              <div>{item.title}</div>
             </div>
-          </div>
-          ))}
+          ))
+        )}
         <h1 className={styles.title}>Thomas F Meagher</h1>
         <pre></pre>
       </main>
