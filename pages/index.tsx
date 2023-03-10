@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 import { gql, wpgraphql } from '../lib/wpgrapghql';
-import { useEffect, useState } from 'react';
+import { JSXElementConstructor, Key, ReactElement, ReactFragment, useEffect, useState } from 'react';
+import { NextPageContext } from 'next';
 
 const GetAllPosts = gql`
   query getPosts {
@@ -23,19 +24,14 @@ const GetAllPosts = gql`
 
 // getAllPosts();
 
-export default function Home() {
-  const [postList, setPostList] = useState<any[]>([]);
+interface PostsPageProps {
+  posts:any;
+}
 
-  const getAllPosts = async () => {
-    const data: any = await wpgraphql.request(GetAllPosts);
+export default function Home({ posts: serverPosts }: PostsPageProps) {
+  const [postList, setPostList] = useState(serverPosts.posts.nodes);
 
-    setPostList(data.posts.nodes);
-  };
-
-  useEffect(() => {
-    getAllPosts();
-  }, []);
-  console.log('postList', postList);
+  console.log(serverPosts);
 
   return (
     <>
@@ -46,11 +42,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        {postList === undefined ? (
+        {postList.length === 0 ? (
           <p>loading</p>
         ) : (
-          postList.map((item) => (
-            <div className="product-item" key={item.title}>
+          postList.map((item: { title: string }) => (
+            <div className="product-item" key={Number(item.title)}>
               <div>{item.title}</div>
             </div>
           ))
@@ -60,4 +56,12 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+export async function getServerSideProps({req, res}: NextPageContext) {
+  const posts: any = await wpgraphql.request(GetAllPosts);
+
+  return {
+    props: {posts},
+  }
 }
