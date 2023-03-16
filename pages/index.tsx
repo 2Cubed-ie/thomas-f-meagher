@@ -8,7 +8,10 @@ const GetAllPosts = gql`
   query getPosts {
     posts {
       nodes {
+        id
+        slug
         title
+        uri
       }
     }
   }
@@ -24,14 +27,31 @@ const GetAllPosts = gql`
 
 // getAllPosts();
 
+type One = {
+  posts: Nodes
+}
+
+type Nodes = {
+  nodes: Posts
+}
+
+type Posts = {
+  map(arg0: (post: { title: string; id: string; }) => JSX.Element): import("react").ReactNode;
+  length: number;
+  id: string
+  slug: string
+  title: string
+  uri: string
+}
+
 interface PostsPageProps {
-  posts:any;
+  posts:One;
 }
 
 export default function Home({ posts: serverPosts }: PostsPageProps) {
-  const [postList, setPostList] = useState(serverPosts.posts.nodes);
+  const [postsList, setPostsList] = useState(serverPosts.posts.nodes);
 
-  console.log(serverPosts);
+  console.log('serverPosts.id', serverPosts);
 
   return (
     <>
@@ -43,12 +63,12 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <main className={styles.main}>
-        {postList.length === 0 ? (
+        {postsList.length === 0 ? (
           <p>loading</p>
         ) : (
-          postList.map((item: { title: string }) => (
-            <div className="product-item" key={Number(item.title)}>
-              <div>{item.title}</div>
+          postsList.map((post) => (
+            <div className="product-item" key={post.id}>
+              <div>{post.title}</div>
             </div>
           ))
         )}
