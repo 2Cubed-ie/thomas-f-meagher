@@ -1,11 +1,16 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.scss';
-import { gql, wpgraphql } from '../lib/wpgrapghql';
-import { useEffect, useState } from 'react';
+import { gql, wpgraphql } from '../../lib/wpgrapghql';
+import { useState } from 'react';
 import { NextPageContext } from 'next';
 import Image from 'next/image';
-import Footer from "@/components/Footer";
-import Link from 'next/link';
+import sign from '../../assets/sign.svg';
+import Carousel from '@/components/Carousel/Carousel';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
 
 const GetAllPosts = gql`
   query getPosts {
@@ -53,15 +58,8 @@ interface PostsPageProps {
 
 export default function Home({ posts: serverPosts }: PostsPageProps) {
   const [postsList, setPostsList] = useState(serverPosts.posts.nodes);
-  // const [screenWidth, setScreenWidth] = useState(0);
 
-  // useEffect(() => {
-  //   return setScreenWidth(window.screen.width);
-  // }, [])
-
-  // console.log(screenWidth);
-  
-  
+  console.log('serverPosts.id', serverPosts);
 
   return (
     <>
@@ -72,31 +70,21 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <main className={`${styles.main} first-page`}>
-        {/* {postsList.length === 0 ? (
-          <p>loading</p>
-        ) : (
-          postsList.map((post) => (
-            <div className="product-item" key={post.id}>
-              <div>{post.title}</div>
-            </div>
-          ))
-        )} */}
-        <div></div>
-        
-        <div className="first-page-block">
-          <div className="first-page-block-btn">
-            <Link className="btn-primary" href="/second">
-              enter here
-            </Link>
-          </div>
-          
-          <h1 className="first-page-block-title">Welcome to the Thomas F. Meagher FOundation</h1>
-        </div>
-        
-        <Footer />
+      <main className={`${styles.main} second-page`} >
+        <Carousel />  
+        {/* <Swiper
+      spaceBetween={50}
+      slidesPerView={3}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+      <SwiperSlide>Slide 1</SwiperSlide>
+      <SwiperSlide>Slide 2</SwiperSlide>
+      <SwiperSlide>Slide 3</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+      ...
+    </Swiper> */}
       </main>
-      
     </>
   );
 }
