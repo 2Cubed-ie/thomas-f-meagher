@@ -13,18 +13,18 @@ const Carousel = () => {
   const [startX, setStartX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
 
-  const mod = (n, m) => {
+  const mod = (n: any, m: any) => {
     const result = n % m;
 
     return result >= 0 ? result : result + m;
   };
 
-  const handleTouchStart = (event) => {
+  const handleTouchStart = (event: any) => {
     setStartX(event.touches[0].clientX);
     setIsSwiping(true);
   };
 
-  const handleTouchMove = (event) => {
+  const handleTouchMove = (event: any) => {
     if (!isSwiping) return;
     const currentX = event.touches[0].clientX;
     const diff = startX - currentX;
