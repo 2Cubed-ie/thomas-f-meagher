@@ -24,7 +24,7 @@ const CarouselSecond = () => {
     setIsSwiping(true);
   };
 
-  const handleTouchMove = (event) => {
+  const handleTouchMove = (event: any) => {
     if (!isSwiping) return;
     const currentX = event.touches[0].clientX;
     const diff = startX - currentX;
