@@ -230,21 +230,21 @@
   }
 
   &--title {
-    font-size: 1vw;
+    font-size: 0.5vw;
     text-align: center;
     line-height: 1.2;
     position: absolute;
     top: -2vw;
     left: 50%;
     transform: translate(-50%);
-    width: 100%;
-    color:#ffffff;
+    width: 50%;
+    color: #ffffff;
     text-transform: uppercase;
     font-weight: 400;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1vw;
+    gap: 5px
   }
 
   &--caption {
@@ -269,6 +269,12 @@
       font-weight: 700;
       text-align: center;
       line-height: 1.2;
+    }
+
+    &--name-secondary {
+      color: #ffffff;
+      text-align: center;
+      font-size: 1.5vw;
     }
 
     &--position {
@@ -366,7 +372,6 @@
   &--image {
     width: 100%;
     border-radius: 50%;
-    border: 3px solid #e46f25;
   }
 
   &--left > .card--caption,

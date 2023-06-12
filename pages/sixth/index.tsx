@@ -2,8 +2,8 @@ import Head from 'next/head';
 import Footer from '@/components/Footer/Footer';
 import photo from '../../assets/slider-3.webp';
 import president from '../../assets/higgins.png';
-import prevImage from '../../assets/p4-prev-image.png';
-import nextImage from '../../assets/p-4-next-image.png';
+import fifthPageIcon from '../../assets/fifthPageIcon.png';
+import seventhPageIcon from '../../assets/seventhPageIcon.png';
 import Header from '@/components/Header/Header';
 
 
@@ -41,8 +41,8 @@ const Sixth = () => {
       </div>
       
       <Footer 
-        prevLink={'/fifth'} prevImage={prevImage.src.toString()}
-        nextLink={'/seventh'} nextImage={nextImage.src.toString()}
+        prevLink={'/fifth'} prevImage={fifthPageIcon.src.toString()}
+        nextLink={'/seventh'} nextImage={seventhPageIcon.src.toString()}
       />
       </main>
     </>

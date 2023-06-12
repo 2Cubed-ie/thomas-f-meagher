@@ -8,8 +8,8 @@ import Footer from "@/components/Footer";
 import Carousel from '@/components/Carousel/Carousel';
 import timeLineImage from '../../assets/timeline-image.png';
 import homeIcon from '../../assets/home-icon.svg';
-import bgPrev from '../../assets/bgPrev.png';
-import bgNext from '../../assets/bgNext.png';
+import secondPageIcon from '../../assets/secondPageIcon.png';
+import fourthPageIcon from '../../assets/fourthPageIcon.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Slider from "react-slick";
@@ -159,7 +159,7 @@ console.log('currentIndex', currentIndex);
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <main className="third-page" >  
-      <Header />
+        <Header />
         
         <div 
           className="timeline"
@@ -242,8 +242,8 @@ console.log('currentIndex', currentIndex);
         <Footer 
           prevLink={'/second'} 
           nextLink={'/fourth'}
-          prevImage={bgPrev.src.toString()}
-          nextImage={bgNext.src.toString()}
+          prevImage={secondPageIcon.src.toString()}
+          nextImage={fourthPageIcon.src.toString()}
         />
       </main>
     </>

@@ -1,0 +1,24 @@
+.info-block {
+  background: #ffffff;
+  width: 20%;
+  position: relative;
+  top: 17%;
+  left: 12%;
+  display: grid;
+  grid-template-columns: 2.5vw 5fr;
+  border-radius: 15px;
+
+  &-image-icon {
+    position: relative;
+    right: 130%;
+    bottom: 25%;
+  }
+
+  &-text {
+    font-size: 1.29vw;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+  }
+}
