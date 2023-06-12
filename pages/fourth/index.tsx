@@ -13,6 +13,10 @@ import CarouselThird from '@/components/CarouselThird/CarouselThird';
 import photo from '../../assets/slider-3.webp';
 import president from '../../assets/higgins.png';
 import arrowBottomWhite from '../../assets/arrow-bottom-white.svg';
+import prevImage from '../../assets/p4-prev-image.png';
+import nextImage from '../../assets/p-4-next-image.png';
+import Header from '@/components/Header/Header';
+
 
 const famousFaces = [
   {id: 1, name: 'Micheal D Higgins', position: 'President', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: president},
@@ -76,12 +80,8 @@ export default function Fourth() {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <main className="fourth-page" >
-      <div className="header">
-        <Link href="/">
-          <Image src={homeIcon} alt="" />
-          <h2>Home</h2>
-        </Link>
-      </div>
+      <Header/>
+      
         <div
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -171,7 +171,10 @@ export default function Fourth() {
           </div>
           
         </div>
-        <Footer prev={true} next={true} />
+        <Footer 
+          prevLink={'/third'} prevImage={prevImage.src.toString()}
+          nextLink={'fifth'} nextImage={nextImage.src.toString()}
+        />
       </main>
     </>
   );

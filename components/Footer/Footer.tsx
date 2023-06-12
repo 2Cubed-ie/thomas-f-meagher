@@ -1,20 +1,43 @@
 import Image from "next/image";
 import signLogo from '../../assets/sign.svg';
-import bgPrev from '../../assets/bgPrev.png';
-import bgNext from '../../assets/bgNext.png';
 import Link from "next/link";
+import arrowRight from '../../assets/arrow-right.svg';
+import arrowLeft from '../../assets/arrow-left.svg';
 
 // console.log('window.screen.width', window.screen.width);
 // console.log('window.screen.width', window.screen.height)
+type Props = {
+  prevLink?: string,
+  nextLink?: string,
+  prevImage?: string,
+  nextImage?: string
+}
 
-const Footer = ({prev = false, next = false}) => {
+const Footer: React.FC<Props> = ({
+  prevLink = '/', 
+  nextLink = '/',
+  prevImage = '',
+  nextImage = ''
+}) => {
   return (
     <div className="footer-block">
       <div className="footer-block-left">
-        {prev &&
-        <Link href="/second">
-          <Image src={bgPrev} alt='' />
-          PREVIOUS
+        {prevLink.length > 1 &&
+        <Link href={prevLink}>
+          <Image 
+            src={prevImage}
+            alt=''
+            width={255}
+            height={255}
+          />
+            PREVIOUS
+          <Image
+            className="footer-block-right-left"
+            src={arrowLeft}
+            width={70}
+            height={70}
+            alt=""
+          /> 
         </Link>
         }
         
@@ -23,10 +46,22 @@ const Footer = ({prev = false, next = false}) => {
         <Image src={signLogo} alt='' className="footer-logo" />
       </div>
       <div className="footer-block-right">
-      {prev &&
-        <Link href="/fourth">
+      {nextLink.length > 1 &&
+        <Link href={nextLink}>
           NEXT
-          <Image src={bgNext} alt='' />
+          <Image 
+            src={nextImage} 
+            alt=''
+            width={255}
+            height={255}
+          />
+          <Image
+            className="footer-block-right-arrow"
+            src={arrowRight}
+            width={70}
+            height={70}
+            alt=""
+          /> 
         </Link>
       }
       </div>

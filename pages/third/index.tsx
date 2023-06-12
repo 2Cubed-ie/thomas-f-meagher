@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import Carousel from '@/components/Carousel/Carousel';
 import timeLineImage from '../../assets/timeline-image.png';
 import homeIcon from '../../assets/home-icon.svg';
+import bgPrev from '../../assets/bgPrev.png';
+import bgNext from '../../assets/bgNext.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Slider from "react-slick";
@@ -20,6 +22,7 @@ import "slick-carousel/slick/slick-theme.css";
 import CarouselSecond from '@/components/Carousel-second/CarouselSecond';
 import CarouselThird from '@/components/CarouselThird/CarouselThird';
 import Link from 'next/link';
+import Header from '@/components/Header/Header';
 
 const GetAllPosts = gql`
   query getPosts {
@@ -156,12 +159,7 @@ console.log('currentIndex', currentIndex);
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <main className="third-page" >  
-      <div className="header">
-        <Link href="/">
-          <Image src={homeIcon} alt="" />
-          <h2>Home</h2>
-        </Link>
-      </div>
+      <Header />
         
         <div 
           className="timeline"
@@ -241,7 +239,12 @@ console.log('currentIndex', currentIndex);
               </div>
             ))}
         </CarouselThird> */}
-        <Footer prev={true} next={true} />
+        <Footer 
+          prevLink={'/second'} 
+          nextLink={'/fourth'}
+          prevImage={bgPrev.src.toString()}
+          nextImage={bgNext.src.toString()}
+        />
       </main>
     </>
   );

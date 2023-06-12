@@ -157,6 +157,31 @@ a {
   align-items: center;
 }
 
+.footer-block-right,
+.footer-block-left {
+  position: relative;
+}
+
+.footer-block-right-arrow {
+  position: absolute;
+  top: 0;
+  left: 4vw;
+  background: #e46e24;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
+}
+
+.footer-block-right-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #e46e24;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0px 5px 17px rgba(0, 0, 0, 0.2);
+}
+
 .footer-block-left a,
 .footer-block-right a {
   align-items: center;
@@ -233,13 +258,11 @@ a {
   // position: relative;
 }
 
-.third-page .header,
-.fourth-page .header {
+.header {
   padding-top: 1%;
 }
 
-.third-page .header a,
-.fourth-page .header a {
+.header a {
   display: flex;
   justify-content: end;
   align-items: center;
@@ -271,3 +294,66 @@ a {
   grid-auto-flow: column;
   gap: 2%;
 }
+
+.fifth-page {
+  background: url('../assets/bg-p-5.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: end;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.sixth-page {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.seventh-page {
+  background-color: #096723;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+
+.eight-page {
+  background: url('../assets/bg-page-two.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: end;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.ninth-page {
+  background: url('../assets/bg-page-two.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: end;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.tenth-page {
+  background-color: #5887CC;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+

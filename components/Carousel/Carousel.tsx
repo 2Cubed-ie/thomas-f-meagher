@@ -3,8 +3,6 @@ import { useState } from 'react';
 import slider1 from '../../assets/s-p-sl-1.png';
 import slider2 from '../../assets/s-p-sl-3.png';
 import slider3 from '../../assets/slider-3.webp';
-import arrowRight from '../../assets/arrow-right.svg';
-import arrowLeft from '../../assets/arrow-left.svg';
 import arrowBottom from '../../assets/arrow-bottom.svg';
 import Link from 'next/link';
 
