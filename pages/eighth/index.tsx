@@ -5,6 +5,7 @@ import president from '../../assets/higgins.png';
 import seventhPageIcon from '../../assets/seventhPageIcon.png';
 import tenthPageIcon from '../../assets/ninthPageIcon.png';
 import Header from '@/components/Header/Header';
+import CarouselEighth from '@/components/Carousel-eighth/CarouselEighth';
 
 
 const contentPageSixth = [
@@ -35,9 +36,7 @@ const Eighth = () => {
         <Header />
 
         <div>
-          <h2 style={{fontSize: '3vw'}}>
-            Eighth
-          </h2>
+          <CarouselEighth />
         </div>
         
         <Footer 

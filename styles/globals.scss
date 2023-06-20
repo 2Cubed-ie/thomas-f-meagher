@@ -565,3 +565,17 @@ a {
   background-color: #ffffff;
   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
+
+.carousel-magazines .card{
+  top: -35vw;
+}
+
+.carousel-magazines .card--image {
+  border-radius: 0;
+  border: none;
+}
+
+.carousel-magazines .card--right,
+.carousel-magazines .card--left {
+  top: -20vw;
+}
