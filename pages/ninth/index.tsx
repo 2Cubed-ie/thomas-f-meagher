@@ -27,21 +27,21 @@ const contentPageSixth = [
 // eslint-disable-next-line react/display-name
 
 // eslint-disable-next-line react/display-name
-const Page = React.forwardRef((props: any, ref) => {
-  return (
-    <div className="page --hard" ref={ref} data-density={0}>
-      <div className="page-content">
-        <h2 className="page-header">Page header - {props.number}</h2>
-        <div
-          className="page-image"
-          style={{ backgroundImage: "url(images/html/" + props.image + ")" }}
-        ></div>
-        <div className="page-text">{props.children}</div>
-        <div className="page-footer">{props.number + 1}</div>
-      </div>
-    </div>
-  );
-});
+// const Page = React.forwardRef((props: any, ref) => {
+//   return (
+//     <div className="page --hard" ref={ref} data-density={0}>
+//       <div className="page-content">
+//         <h2 className="page-header">Page header - {props.number}</h2>
+//         <div
+//           className="page-image"
+//           style={{ backgroundImage: "url(images/html/" + props.image + ")" }}
+//         ></div>
+//         <div className="page-text">{props.children}</div>
+//         <div className="page-footer">{props.number + 1}</div>
+//       </div>
+//     </div>
+//   );
+// });
 
 const Ninth = () => {
   const bookRef = useRef(null);
@@ -60,7 +60,7 @@ const Ninth = () => {
         <Header />
 
         <div className="ninth-page-main" >
-          <HTMLFlipBook width={1200} height={1200} showCover={true}>
+          {/* <HTMLFlipBook width={1200} height={1200} showCover={true}>
           <Page number="0" data-density="0" className="--soft">
           <Image
               src={contentPageSixth[2].photo.src}
@@ -134,7 +134,7 @@ const Ninth = () => {
                 alt=''
               />
             </Page>
-          </HTMLFlipBook>
+          </HTMLFlipBook> */}
 
           {/* <HTMLFlipBook width={500} height={500}>
             <div className="demoPage">
