@@ -2,7 +2,7 @@
   background: #ffffff;
   width: 20%;
   display: grid;
-  grid-template-columns: 2.5vw 5fr;
+  grid-template-columns: 2.8vw 5fr;
   border-radius: 15px;
   gap: 10px;
 
@@ -28,11 +28,8 @@
 }
 
 .fifth-page-wrapper-info-block {
-  // position: relative;
-  // top: 17%;
-  // left: 12%
   position: absolute;
   top: 50%;
   left: 80%;
-  width: 100%
+  width: 95%;
 }

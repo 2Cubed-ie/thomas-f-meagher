@@ -5,6 +5,9 @@ import president from '../../assets/higgins.png';
 import sixthPageIcon from '../../assets/sixthPageIcon.png';
 import eighthPageIcon from '../../assets/eighthPageIcon.png';
 import Header from '@/components/Header/Header';
+import Image from 'next/image';
+import centerImage from '../../assets/7-center-image.png'
+import leftImage from '../../assets/7-left-image.png'
 
 
 const contentPageSixth = [
@@ -34,10 +37,42 @@ const Seventh = () => {
       <main className="seventh-page" >
         <Header />
 
-        <div>
-          <h2 style={{fontSize: '3vw'}}>
-            Seventh
-          </h2>
+        <div className="seventh-page-main">
+          <div className="seventh-page-main-left">
+            <Image
+              src={leftImage}
+              alt=''
+              className="seventh-page-main-left-img"
+            />
+            <div className="seventh-page-main-left-caption">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Suspendisse convallis ac arcu ac mattis. 
+                Aliquam at blandit massa.
+              </p>
+            </div>
+          </div>
+
+          <div className="seventh-page-main-center">
+            <Image
+              src={centerImage}
+              alt=''
+              className="seventh-page-main-center-img"
+            />
+          </div>
+
+          <div className="seventh-page-main-right">
+            <h2 className="seventh-page-main-right-title">
+              Seventh
+            </h2>
+            <p className="seventh-page-main-right-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis ac arcu ac mattis. Aliquam at blandit massa. Duis ac ligula eget justo ornare scelerisque sed eget dolor. Sed ullamcorper quam at sapien lacinia, nec venenatis elit rutrum. Duis fringilla velit a semper laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam vitae hendrerit diam. Duis purus mi, congue id efficitur in, eleifend ornare urna. Phasellus vehicula purus at leo malesuada vestibulum.
+            </p>
+            
+            <p className="seventh-page-main-right-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis ac arcu ac mattis. Aliquam at blandit massa. Duis ac ligula eget justo ornare scelerisque sed eget dolor. Sed ullamcorper quam at sapien lacinia, nec venenatis elit rutrum. Duis fringilla velit a semper laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam vitae hendrerit diam. Duis purus mi, congue id efficitur in, eleifend ornare urna. Phasellus vehicula purus at leo malesuada vestibulum.
+            </p>
+          </div>
         </div>
         
         <Footer 

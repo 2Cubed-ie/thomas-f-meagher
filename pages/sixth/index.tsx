@@ -5,8 +5,10 @@ import president from '../../assets/higgins.png';
 import fifthPageIcon from '../../assets/fifthPageIcon.png';
 import seventhPageIcon from '../../assets/seventhPageIcon.png';
 import playIcon from '../../assets/play-icon.svg';
+import pauseIcon from '../../assets/pause-icon.svg';
 import Header from '@/components/Header/Header';
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 // import video from '../../assets/video/kennedy.mp4';
 
 
@@ -39,7 +41,7 @@ const Sixth = () => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <main className="sixth-page" >
-      <Header />
+      <Header orange={true}/>
 
       <div className="sixth-page-video-block">
         <div className="sixth-page-wrapper-video">
@@ -52,22 +54,46 @@ const Sixth = () => {
           ref={videoRef}
         />
         </div>
-        <div>
-          {isPlaying ? (
+        <div className="video-start-stop-btn-wrapper">
+          {isPlaying 
+          ? (
             <button onClick={() => {
-              setIsPlaying(false);
+              setIsPlaying(!isPlaying);
               videoRef.current.pause();
-            }}>
-              Pause
+            }}
+            className="video-start-stop-btn"
+            >
+              <Image 
+                src={pauseIcon.src}
+                alt="" 
+                height={60}
+                width={60}
+              />
             </button>
-          ) : (
-            <a onClick={() => {
-              setIsPlaying(true);
-              videoRef.current.play();
-            }}>
-              <img src={playIcon.src} alt="" height={60}/>
+          ) 
+          : (
+            <a 
+              onClick={() => {
+                setIsPlaying(!isPlaying);
+                videoRef.current.play();
+              }}
+              className="video-start-stop-btn"
+            >
+              <Image 
+                src={playIcon.src}
+                alt="" 
+                height={60}
+                width={60}
+              />
             </a>
           )}
+          <h2>WATCH THE VIDEO of John F. Kennedy’s speach</h2>
+        </div>
+
+        <div className="sixth-page-video-block-caption">
+          <p>
+            President Kennedy addressing the Irish Parliament, September 1963. His opening remarks mention Thomas F. Meagher and the 69th regiment
+          </p>
         </div>
       </div>
       
