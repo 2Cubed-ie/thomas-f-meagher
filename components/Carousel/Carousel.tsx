@@ -46,6 +46,7 @@ const Carousel = () => {
       title: 'Let’s Take a look at the History of Thomas F. Meagher and The Irish flag',
       // eslint-disable-next-line max-len
       caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+      link: '/third',
     },
     {
       id: '2',
@@ -53,6 +54,7 @@ const Carousel = () => {
       title: 'History of the flags used in Ireland',
       // eslint-disable-next-line max-len
       caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+      link: '/fifth',
     },
     {
       id: '3',
@@ -60,6 +62,7 @@ const Carousel = () => {
       title: 'What the Irish flag means to me',
       // eslint-disable-next-line max-len
       caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+      link: '/fourth',
     },
   ];
 
@@ -108,7 +111,7 @@ const Carousel = () => {
               />
               
                 <div className="second-page-block-btn">
-                  <Link className="btn-primary" href="/third">
+                  <Link className="btn-primary" href={item.link}>
                     take a look
                   </Link>
                 </div>

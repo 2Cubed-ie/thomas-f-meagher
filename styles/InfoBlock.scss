@@ -1,12 +1,10 @@
 .info-block {
   background: #ffffff;
   width: 20%;
-  position: relative;
-  top: 17%;
-  left: 12%;
   display: grid;
   grid-template-columns: 2.5vw 5fr;
   border-radius: 15px;
+  gap: 10px;
 
   &-image-icon {
     position: relative;
@@ -21,4 +19,20 @@
     align-items: center;
     text-transform: uppercase;
   }
+}
+
+.fourth-page-wrapper-info-block {
+  position: relative;
+  top: 17%;
+  left: 12%;
+}
+
+.fifth-page-wrapper-info-block {
+  // position: relative;
+  // top: 17%;
+  // left: 12%
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  width: 100%
 }

@@ -186,8 +186,11 @@ export default function Fourth() {
       })}
           </div>
         </div>
-          
-        <InfoBlock text={'Swipe Left or right to view the famous faces'}/>
+        
+        <div className="fourth-page-wrapper-info-block">
+          <InfoBlock text={'Swipe Left or right to view the famous faces'}/>
+        </div>
+        
         <Footer 
           prevLink={'/third'} prevImage={thirdPageIcon.src.toString()}
           nextLink={'fifth'} nextImage={fifthPageIcon.src.toString()}

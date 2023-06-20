@@ -74,7 +74,7 @@ export default function Third({ posts: serverPosts }: PostsPageProps) {
   const timelineDecades: any[] | (() => any[]) = [];
   // const [tDecades, setTDecades] = useState([1890, 1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020]); 
   const [tDecades, setTDecades] = useState(timelineDecades); 
-  const [pointsTimeline, setPointsTimeine] = useState([1895, 1896, 1916, 2013]);
+  const [pointsTimeline, setPointsTimeine] = useState([1895, 1896, 1916, 1910, 2013]);
 
   // for (let i = timeline[0]; i <= timeline[1]; i++) {
   //   if(i % 10 === 0){
@@ -169,7 +169,9 @@ console.log('currentIndex', currentIndex);
           <div className="timeline-years">
             {tDecades.map((decade, index) => (
               decade % 10 === 0
-              ? <div key={decade} className={`year year-${index} ${currentIndex === index && 'active'}`} 
+              ? 
+              <div key={decade} className="year-wraper">
+                <div  className={`year year-${index} ${currentIndex === index && 'active'}`} 
               // style={
               //   currentIndex > 0 
               //   ? { transform: `translateX(-${(currentIndex * 100)}%)`, transitionProperty: 'transform',
@@ -187,6 +189,8 @@ console.log('currentIndex', currentIndex);
                 <div className="timeline-line">
                   <svg width="100%" height="100%"><line x1="85" y1="100" x2="85" y2="250" stroke="white" strokeWidth="5"></line></svg>
                 </div>
+              </div>
+
               </div>
               : <div key={decade} 
                   style={
