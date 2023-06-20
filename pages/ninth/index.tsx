@@ -5,6 +5,11 @@ import president from '../../assets/higgins.png';
 import seventhPageIcon from '../../assets/seventhPageIcon.png';
 import tenthPageIcon from '../../assets/ninthPageIcon.png';
 import Header from '@/components/Header/Header';
+import HTMLFlipBook from 'react-pageflip';
+// import { PageCover } from 'react-pageflip';
+import Image from 'next/image';
+import React, { useRef } from 'react';
+;
 
 
 const contentPageSixth = [
@@ -19,7 +24,27 @@ const contentPageSixth = [
   {id: 9, name: 'Katie Taylor9', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: photo},
 ];
 
+// eslint-disable-next-line react/display-name
+
+// eslint-disable-next-line react/display-name
+const Page = React.forwardRef((props: any, ref) => {
+  return (
+    <div className="page --hard" ref={ref} data-density={0}>
+      <div className="page-content">
+        <h2 className="page-header">Page header - {props.number}</h2>
+        <div
+          className="page-image"
+          style={{ backgroundImage: "url(images/html/" + props.image + ")" }}
+        ></div>
+        <div className="page-text">{props.children}</div>
+        <div className="page-footer">{props.number + 1}</div>
+      </div>
+    </div>
+  );
+});
+
 const Ninth = () => {
+  const bookRef = useRef(null);
 
   return (
     <>
@@ -34,10 +59,120 @@ const Ninth = () => {
       <main className="ninth-page" >
         <Header />
 
-        <div>
-          <h2 style={{fontSize: '3vw'}}>
-          Ninth
-          </h2>
+        <div className="ninth-page-main" >
+          <HTMLFlipBook width={1200} height={1200} showCover={true}>
+          <Page number="0" data-density="0" className="--soft">
+          <Image
+              src={contentPageSixth[2].photo.src}
+              // width={300}
+              // height={500}
+              fill
+              alt=''
+            />
+        </Page>
+            <Page number="1" >
+              <Image
+                src={contentPageSixth[1].photo.src}
+                // width={300}
+                // height={500}
+                fill
+                alt=''
+              />
+            </Page>
+            <Page number="2">
+              <Image
+                src={contentPageSixth[2].photo.src}
+                // width={300}
+                // height={500}
+                fill
+                alt=''
+              />
+            </Page>
+            <Page number="3">
+              <Image
+                src={contentPageSixth[3].photo.src}
+                // width={300}
+                // height={500}
+                fill
+                alt=''
+              />
+            </Page>
+            <Page number="4">
+              <Image
+                src={contentPageSixth[4].photo.src}
+                // width={300}
+                // height={500}
+                fill
+                alt=''
+              />
+            </Page>
+            <Page number="5">
+              <Image
+                src={contentPageSixth[5].photo.src}
+                // width={300}
+                // height={500}
+                fill
+                alt=''
+              />
+            </Page>
+            <Page number="6">
+              <Image
+                src={contentPageSixth[6].photo.src}
+                // width={300}
+                // height={500}
+                fill
+                alt=''
+              />
+            </Page>
+
+            <Page number={contentPageSixth.length} style={{backgorundColor: 'red'}} data-density="0">
+            <Image
+                src={contentPageSixth[6].photo.src}
+                // width={300}
+                // height={500}
+                fill
+                alt=''
+              />
+            </Page>
+          </HTMLFlipBook>
+
+          {/* <HTMLFlipBook width={500} height={500}>
+            <div className="demoPage">
+              <Image
+                src={contentPageSixth[1].photo.src}
+                width={500}
+                height={500}
+                alt=''
+              />
+            </div>
+
+            <div className="demoPage">
+              <Image
+                src={contentPageSixth[2].photo.src}
+                width={500}
+                height={500}
+                alt=''
+              />
+            </div>
+
+            <div className="demoPage">
+              <Image
+                src={contentPageSixth[3].photo.src}
+                width={500}
+                height={500}
+                alt=''
+              />
+            </div>
+
+            <div className="demoPage">
+              <Image
+                src={contentPageSixth[4].photo.src}
+                width={500}
+                height={500}
+                alt=''
+              />
+            </div>
+          </HTMLFlipBook> */}
         </div>
         
         <Footer 

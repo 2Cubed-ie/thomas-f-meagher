@@ -579,3 +579,76 @@ a {
 .carousel-magazines .card--left {
   top: -20vw;
 }
+
+.ninth-page-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tenth-page-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+
+  &-title {
+    font-size: 2vw;
+    width: 50%;
+    text-align: center;
+  }
+
+  &-input {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    font-size: 2vw;
+  }
+
+  &-keyboard {
+    height: 800px;
+    width: 80%;
+    background-color: #000000;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 1vw;
+    padding: 1.9vw 0.9vw;
+  }
+  &-keyboard-keys {
+    display: flex;
+    justify-content: space-between;
+    gap: 1vw;
+  }
+
+  &-keyboard-keys a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    background: rgba(255, 255, 255, 0.12);
+    height: 150px;
+    width: 100%;
+  }
+}
+
+.tenth-page-main-keyboard-keys-first {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+}
+
+.tenth-page-main-keyboard-keys-second {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+  padding-left: 3.5vw;
+}
+
+.tenth-page-main-keyboard-keys-third {
+  // display: grid;
+}
+
+.tenth-page-main-keyboard-keys-fourth {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 5fr 1fr 1fr 1fr;
+}
+
+

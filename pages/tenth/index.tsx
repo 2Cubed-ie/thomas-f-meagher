@@ -19,6 +19,60 @@ const contentPageSixth = [
   {id: 9, name: 'Katie Taylor9', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: photo},
 ];
 
+const firstColumn = [
+  {keyValue: 'q'},
+  {keyValue: 'w'},
+  {keyValue: 'e'},
+  {keyValue: 'r'},
+  {keyValue: 't'},
+  {keyValue: 'y'},
+  {keyValue: 'u'},
+  {keyValue: 'i'},
+  {keyValue: 'o'},
+  {keyValue: 'p'},
+  {keyValue: 'backspace'},
+];
+// ~!$%^&*_=+}{'?-.
+
+const secondColumn = [
+  {keyValue: 'a'},
+  {keyValue: 's'},
+  {keyValue: 'd'},
+  {keyValue: 'f'},
+  {keyValue: 'g'},
+  {keyValue: 'h'},
+  {keyValue: 'j'},
+  {keyValue: 'k'},
+  {keyValue: 'l'},
+  {keyValue: ';'},
+  {keyValue: 'enter'},
+];
+
+const thirdColumn = [
+  {keyValue: 'row up'},
+  {keyValue: 'z'},
+  {keyValue: 'x'},
+  {keyValue: 'c'},
+  {keyValue: 'v'},
+  {keyValue: 'b'},
+  {keyValue: 'n'},
+  {keyValue: 'm'},
+  {keyValue: ','},
+  {keyValue: '.'},
+  {keyValue: '?'},
+  {keyValue: 'row up'},
+];
+
+const fourthColumn = [
+  {keyValue: '&123'},
+  {keyValue: 'Ctrl'},
+  {keyValue: '@'},
+  {keyValue: 'space'},
+  {keyValue: '<'},
+  {keyValue: '>'},
+  {keyValue: 'keyboard'},
+];
+
 const Tenth = () => {
 
   return (
@@ -34,10 +88,39 @@ const Tenth = () => {
       <main className="tenth-page" >
         <Header />
 
-        <div>
-          <h2 style={{fontSize: '3vw'}}>
-          Tenth
+        <div className="tenth-page-main">
+          <h2 className="tenth-page-main-title">
+            Enter your email address to receive the Protocol for the national flag
           </h2>
+          <div className="tenth-page-main-input">
+            <p>your email address</p>
+            <a href="">submit</a>
+          </div>
+          <div className="tenth-page-main-keyboard">
+            <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-first">
+              {firstColumn.map(keyOne => 
+                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+              )}
+            </div>
+
+            <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-second">
+              {secondColumn.map(keyOne => 
+                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+              )}
+            </div>
+
+            <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-third">
+              {thirdColumn.map(keyOne => 
+                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+              )}
+            </div>
+
+            <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-fourth">
+              {fourthColumn.map(keyOne => 
+                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+              )}
+            </div>
+          </div>
         </div>
         
         <Footer 
