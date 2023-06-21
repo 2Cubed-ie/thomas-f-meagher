@@ -36,7 +36,7 @@ const firstColumn = [
   {keyValue: 'i', keyValueNumber: '8'},
   {keyValue: 'o', keyValueNumber: '9'},
   {keyValue: 'p', keyValueNumber: '0'},
-  {keyValue: 'backspace', keyImage: backspaceIcon},
+  {keyValue: 'backspace', keyValueNumber: 'backspace', keyImage: backspaceIcon},
 ];
 // ~!$%^&*_=+}{'?-.
 // ?.
@@ -92,7 +92,8 @@ const Tenth = () => {
 
   const writeEmail = (value: string) => {
     if (value === 'backspace') {
-      return setEmail(email.slice(0, -1));
+      setEmail(email.slice(0, -1));
+      return;
     }
 
     if (value === 'enter' || value === 'ctrl') {
