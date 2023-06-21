@@ -10,7 +10,7 @@ import arrowUpIcon from '../../assets/arrow-up.svg'
 import enterIcon from '../../assets/enter.svg'
 import keyboardIcon from '../../assets/keyboard-icon.svg'
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 
 const contentPageSixth = [
@@ -86,6 +86,7 @@ const Tenth = () => {
   const [isSymbols, setIsSymbols] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   let usernameRef = email;
 
   if (email !== '') {
@@ -127,14 +128,19 @@ const Tenth = () => {
 
   const validateEmail = (value: string) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    console.log('!emailRegex.test(value)', !emailRegex.test(value));
+    // (emailRegex.test(value))
     setShowError(!emailRegex.test(value));
   }
 
   async function handleSubmit (e: React.FormEvent) {
     e.preventDefault();
-    await validateEmail(email);
+    validateEmail(email);
+    console.log(showError);
+    
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-    if (showError) {
+    if (!emailRegex.test(email)) {
       return;
     }
 
@@ -163,10 +169,33 @@ const Tenth = () => {
       result = { message: `Failed: ${error}` };
     }
 
-    alert(result.message);
+    // alert(result.message);
+    setShowSuccess(true);
 
     setEmail('');
   }
+
+  useEffect(() => {
+    if (showError) {
+      const timeoutId = setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+  
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+
+    if (showSuccess) {
+      const timeoutId = setTimeout(() => {
+        setShowSuccess(false);
+      }, 3000);
+  
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [showError, showSuccess]);
 
   // console.log(showError);
   
@@ -196,11 +225,11 @@ const Tenth = () => {
               className="tenth-page-main-form-input" 
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              autoFocus
-              required
+              // autoFocus
+              // required
               ref={inputRef}
             />
-            {showError && <div className="error-message">Please enter a valid email address.</div>}
+            <div className={`error-message ${showError ? "smooth" : ''}`}>Please enter a valid email address.</div>
              <button type="submit" className="tenth-page-main-form-btn">submit</button>
             </form>
           </div>
@@ -285,6 +314,15 @@ const Tenth = () => {
             </div>
           </div>
         </div>
+        
+        <div 
+          className={`success-message ${showSuccess ? 'smooth' : ''}`}
+        >
+          <div 
+            className="success-message-text"
+          >{'We\'ll send you the Protocol for the national flag'}</div>
+        </div>
+        
         
         <Footer 
           prevLink={'/ninth'} prevImage={eighthPageIcon.src.toString()}
