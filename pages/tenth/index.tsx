@@ -5,6 +5,12 @@ import president from '../../assets/higgins.png';
 import eighthPageIcon from '../../assets/eighthPageIcon.png';
 import secondPageIcon from '../../assets/secondPageIcon.png';
 import Header from '@/components/Header/Header';
+import backspaceIcon from '../../assets/backspace.svg'
+import arrowUpIcon from '../../assets/arrow-up.svg'
+import enterIcon from '../../assets/enter.svg'
+import keyboardIcon from '../../assets/keyboard-icon.svg'
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 
 const contentPageSixth = [
@@ -20,60 +26,104 @@ const contentPageSixth = [
 ];
 
 const firstColumn = [
-  {keyValue: 'q'},
-  {keyValue: 'w'},
-  {keyValue: 'e'},
-  {keyValue: 'r'},
-  {keyValue: 't'},
-  {keyValue: 'y'},
-  {keyValue: 'u'},
-  {keyValue: 'i'},
-  {keyValue: 'o'},
-  {keyValue: 'p'},
-  {keyValue: 'backspace'},
+  {keyValue: 'q', keyValueNumber: '1'},
+  {keyValue: 'w', keyValueNumber: '2'},
+  {keyValue: 'e', keyValueNumber: '3'},
+  {keyValue: 'r', keyValueNumber: '4'},
+  {keyValue: 't', keyValueNumber: '5'},
+  {keyValue: 'y', keyValueNumber: '6'},
+  {keyValue: 'u', keyValueNumber: '7'},
+  {keyValue: 'i', keyValueNumber: '8'},
+  {keyValue: 'o', keyValueNumber: '9'},
+  {keyValue: 'p', keyValueNumber: '0'},
+  {keyValue: 'backspace', keyImage: backspaceIcon},
 ];
 // ~!$%^&*_=+}{'?-.
+// ?.
 
 const secondColumn = [
-  {keyValue: 'a'},
-  {keyValue: 's'},
-  {keyValue: 'd'},
-  {keyValue: 'f'},
-  {keyValue: 'g'},
-  {keyValue: 'h'},
-  {keyValue: 'j'},
-  {keyValue: 'k'},
-  {keyValue: 'l'},
-  {keyValue: ';'},
-  {keyValue: 'enter'},
+  {keyValue: 'a', keyValueNumber: '~'},
+  {keyValue: 's', keyValueNumber: '!'},
+  {keyValue: 'd', keyValueNumber: '$'},
+  {keyValue: 'f', keyValueNumber: '%'},
+  {keyValue: 'g', keyValueNumber: '^'},
+  {keyValue: 'h', keyValueNumber: '&'},
+  {keyValue: 'j', keyValueNumber: '*'},
+  {keyValue: 'k', keyValueNumber: '_'},
+  {keyValue: 'l', keyValueNumber: '='},
+  {keyValue: ';', keyValueNumber: ';'},
+  {keyValue: 'enter', keyImage: enterIcon},
 ];
 
 const thirdColumn = [
-  {keyValue: 'row up'},
-  {keyValue: 'z'},
-  {keyValue: 'x'},
-  {keyValue: 'c'},
-  {keyValue: 'v'},
-  {keyValue: 'b'},
-  {keyValue: 'n'},
-  {keyValue: 'm'},
-  {keyValue: ','},
-  {keyValue: '.'},
-  {keyValue: '?'},
-  {keyValue: 'row up'},
+  {keyValue: 'row up', keyImage: arrowUpIcon },
+  {keyValue: 'z', keyValueNumber: '+'},
+  {keyValue: 'x', keyValueNumber: '}'},
+  {keyValue: 'c', keyValueNumber: '{'},
+  {keyValue: 'v', keyValueNumber: "'"},
+  {keyValue: 'b', keyValueNumber: '-'},
+  {keyValue: 'n', keyValueNumber: '<'},
+  {keyValue: 'm', keyValueNumber: '>'},
+  {keyValue: ',', keyValueNumber: ','},
+  {keyValue: '.', keyValueNumber: '.'},
+  {keyValue: '?', keyValueNumber: '?'},
+  {keyValue: 'row up', keyImage: arrowUpIcon },
 ];
 
 const fourthColumn = [
   {keyValue: '&123'},
-  {keyValue: 'Ctrl'},
+  {keyValue: 'ctrl'},
   {keyValue: '@'},
   {keyValue: 'space'},
   {keyValue: '<'},
   {keyValue: '>'},
-  {keyValue: 'keyboard'},
+  {keyValue: 'keyboard', keyImage: keyboardIcon},
 ];
 
 const Tenth = () => {
+  const [email, setEmail] = useState('');
+  const [isUpperCase, setIsUpperCase] = useState(false);
+  const [isSymbols, setIsSymbols] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  if (email !== '') {
+    inputRef.current?.focus();
+  }
+
+  const writeEmail = (value: string) => {
+    if (value === 'backspace') {
+      return setEmail(email.slice(0, -1));
+    }
+
+    if (value === 'enter' || value === 'ctrl') {
+      return;
+    }
+
+    if (value === 'row up') {
+      setIsUpperCase(!isUpperCase);
+      return;
+    }
+
+    if (value === '&123') {
+      setIsSymbols(true);
+      return
+    }
+
+    if (value === 'keyboard') {
+      setIsSymbols(false);
+      return
+    }
+
+    if (value === 'space') {
+      setEmail(email => email + ' ')
+      return
+    }
+
+    setEmail(email => email + value);
+  }
+
+  console.log(email);
+  
 
   return (
     <>
@@ -92,32 +142,98 @@ const Tenth = () => {
           <h2 className="tenth-page-main-title">
             Enter your email address to receive the Protocol for the national flag
           </h2>
-          <div className="tenth-page-main-input">
-            <p>your email address</p>
-            <a href="">submit</a>
+          <div className="tenth-page-main-form-wrapper">
+            <form action="" className="tenth-page-main-form" >
+             <input 
+              type="email"
+              placeholder="your email address"
+              className="tenth-page-main-form-input" 
+              onChange={() => {}}
+              value={email}
+              autoFocus
+              required
+              ref={inputRef}
+            />
+             <button type="submit" className="tenth-page-main-form-btn">submit</button>
+            </form>
           </div>
           <div className="tenth-page-main-keyboard">
             <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-first">
-              {firstColumn.map(keyOne => 
-                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+              {firstColumn.map((keyOne: any) =>
+              <a 
+                key={keyOne.keyValue} 
+                onClick={() => writeEmail(!isSymbols ? keyOne.keyValue : keyOne.keyValueNumber)}
+                className={`${isUpperCase ? 'class-upper-case' : ''}`}
+              >
+              {keyOne.keyImage
+              ? <Image src={keyOne.keyImage} alt=''/>
+              : <>
+                  {!isSymbols
+                  ? <>
+                      {keyOne.keyValue}
+                      {keyOne.keyValueNumber && 
+                      <p>
+                        {keyOne.keyValueNumber}
+                      </p>}
+                    </>
+                  : <>
+                    {keyOne.keyValueNumber}
+                </>
+                  }
+              </>
+              }
+              </a>
               )}
             </div>
 
             <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-second">
-              {secondColumn.map(keyOne => 
-                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+              {secondColumn.map((keyOne: any) => 
+                <a 
+                  key={keyOne.keyValue} 
+                  onClick={() => writeEmail(!isSymbols ? keyOne.keyValue : keyOne.keyValueNumber)}
+                  className={`${isUpperCase ? 'class-upper-case' : ''}`}
+                >
+                {keyOne.keyImage 
+                ? <Image src={keyOne.keyImage} alt=''/>
+                : <>
+                    {!isSymbols
+                      ? keyOne.keyValue
+                    : keyOne.keyValueNumber
+                    }
+                  </>
+                }</a>  
               )}
             </div>
 
             <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-third">
-              {thirdColumn.map(keyOne => 
-                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+              {thirdColumn.map((keyOne: any, index) => 
+                <a
+                  key={keyOne.keyValue + index}
+                  onClick={() => writeEmail(!isSymbols ? keyOne.keyValue : keyOne.keyValueNumber)}
+                  className={`${isUpperCase ? 'class-upper-case' : ''}`}
+                >
+                  {keyOne.keyImage 
+                  ? <Image src={keyOne.keyImage} alt=''/>
+                  : <>
+                      {!isSymbols
+                        ? keyOne.keyValue
+                      : keyOne.keyValueNumber
+                      }
+                    </>
+                  }</a>  
               )}
             </div>
 
             <div className="tenth-page-main-keyboard-keys tenth-page-main-keyboard-keys-fourth">
               {fourthColumn.map(keyOne => 
-                <a key={keyOne.keyValue}>{keyOne.keyValue}</a>  
+                <a 
+                  key={keyOne.keyValue}
+                  onClick={() => writeEmail(keyOne.keyValue)}
+                >
+                  {keyOne.keyImage 
+                  ? <Image src={keyOne.keyImage} alt=''/>
+                  : keyOne.keyValue}
+                </a>  
               )}
             </div>
           </div>
