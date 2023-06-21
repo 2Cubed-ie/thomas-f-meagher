@@ -132,7 +132,7 @@ const Tenth = () => {
 
   async function handleSubmit (e: React.FormEvent) {
     e.preventDefault();
-    validateEmail(email);
+    await validateEmail(email);
 
     if (showError) {
       return;
@@ -162,6 +162,7 @@ const Tenth = () => {
     } catch (error) {
       result = { message: `Failed: ${error}` };
     }
+
     alert(result.message);
 
     setEmail('');

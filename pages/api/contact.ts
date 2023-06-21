@@ -15,8 +15,8 @@ type Data = {
 
 import nodemailer from "nodemailer";
 
-const email = 'artem@2cubed.ie'
-const password = 'bdlpcteakvdworcc'
+const email = process.env.EMAIL
+const password = process.env.EMAIL_PASSWORD
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
