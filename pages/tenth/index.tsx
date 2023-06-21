@@ -85,6 +85,8 @@ const Tenth = () => {
   const [isUpperCase, setIsUpperCase] = useState(false);
   const [isSymbols, setIsSymbols] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [showError, setShowError] = useState(false);
+  let usernameRef = email;
 
   if (email !== '') {
     inputRef.current?.focus();
@@ -123,7 +125,49 @@ const Tenth = () => {
     setEmail(email => email + value);
   }
 
-  console.log(email);
+  const validateEmail = (value: string) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    setShowError(!emailRegex.test(value));
+  }
+
+  async function handleSubmit (e: React.FormEvent) {
+    e.preventDefault();
+    validateEmail(email);
+
+    if (showError) {
+      return;
+    }
+
+    let userEmail = email;
+    //Some form Validation
+    if (!userEmail) {
+      alert("Failed: Ensure to fill all form inputs");
+      return;
+    }
+    // Clear the form inputs after submit
+    usernameRef="";
+
+    const formValues = { userEmail };
+    let result;
+    try {
+      let data = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(formValues),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      result = await data.json();
+    } catch (error) {
+      result = { message: `Failed: ${error}` };
+    }
+    alert(result.message);
+
+    setEmail('');
+  }
+
+  // console.log(showError);
   
 
   return (
@@ -144,17 +188,18 @@ const Tenth = () => {
             Enter your email address to receive the Protocol for the national flag
           </h2>
           <div className="tenth-page-main-form-wrapper">
-            <form action="" className="tenth-page-main-form" >
+            <form action="" className="tenth-page-main-form" onSubmit={handleSubmit}>
              <input 
-              type="email"
+              type="text"
               placeholder="your email address"
               className="tenth-page-main-form-input" 
-              onChange={() => {}}
+              onChange={(e) => setEmail(e.target.value)}
               value={email}
               autoFocus
               required
               ref={inputRef}
             />
+            {showError && <div className="error-message">Please enter a valid email address.</div>}
              <button type="submit" className="tenth-page-main-form-btn">submit</button>
             </form>
           </div>
