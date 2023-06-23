@@ -61,14 +61,14 @@ const Page = React.forwardRef((props: any, ref: any) => {
   );
 });
 
-const Ninth = ({posts: serverPosts}: any) => {
+const Ninth = ({currentMagazine, setCurrentMagazine}: any) => {
 
-  console.log('serverPosts', serverPosts);
+  console.log('serverPosts', currentMagazine);
 
   const combinedRegex = /data="([^"]+)"|src="([^"]+)"/g;
 
 // Extract the links using the combined regex
-  const linkMatches = serverPosts.posts.nodes[0].content.match(combinedRegex);
+  const linkMatches = currentMagazine.content.match(combinedRegex);
   const links = linkMatches ? linkMatches.map((match: string) => match.split(/data=|src=/)[1].slice(1, -1)) : [];
 
 
@@ -88,8 +88,8 @@ console.log('links', links);
         <link rel="manifest" href="/manifest.json" />
       </Head>
 
-      <main className="ninth-page" >
-        <Header />
+      {/* <main className="ninth-page" > */}
+        
 
         <div className="ninth-page-main" >
         {/* @ts-ignore */}
@@ -320,13 +320,14 @@ console.log('links', links);
               />
             </div>
           </HTMLFlipBook> */}
+          <a href="" className="close-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              setCurrentMagazine();
+            }}
+          >close X</a>
         </div>
-        
-        <Footer 
-          prevLink={'/seventh'} prevImage={seventhPageIcon.src.toString()}
-          nextLink={'/tenth'} nextImage={tenthPageIcon.src.toString()}
-        />
-      </main>
+      {/* </main> */}
     </>
   );
 }

@@ -5,11 +5,16 @@ import slider2 from './img/magazine-2.png';
 import slider3 from './img/magazine-3.png';
 import arrowBottom from '../../assets/arrow-bottom.svg';
 import Link from 'next/link';
+import Ninth from '@/pages/ninth';
 
-const CarouselEighth = () => {
+const CarouselEighth = ({
+  magazines,
+  setCurrentMagazine
+}: any) => {
   const [index, setIndex] = useState(0);
   const [startX, setStartX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
+  // const [currentMagazine, setCurrentMagazine] = useState();
 
   const mod = (n: any, m: any) => {
     const result = n % m;
@@ -30,60 +35,60 @@ const CarouselEighth = () => {
 
     if (diff > threshold) {
       // swipe left
-      setIndex((index + 1) % cards.length);
+      setIndex((index + 1) % magazines.length);
     } else if (diff < -threshold) {
       // swipe right
-      setIndex(mod(index - 1, cards.length));
+      setIndex(mod(index - 1, magazines.length));
     }
 
     setIsSwiping(false);
   };
 
-  const cards = [
-    {
-      id: '1',
-      image: slider1,
-      title: 'Let’s Take a look at the History of Thomas F. Meagher and The Irish flag',
-      // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/third',
-    },
-    {
-      id: '2',
-      image: slider2,
-      title: 'History of the flags used in Ireland',
-      // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/fifth',
-    },
-    {
-      id: '3',
-      image: slider3,
-      title: 'What the Irish flag means to me',
-      // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/fourth',
-    },
-    {
-      id: '4',
-      image: slider2,
-      title: 'History of the flags used in Ireland',
-      // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/fifth',
-    },
+  // const cards = [
+  //   {
+  //     id: '1',
+  //     image: slider1,
+  //     title: 'Let’s Take a look at the History of Thomas F. Meagher and The Irish flag',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/third',
+  //   },
+  //   {
+  //     id: '2',
+  //     image: slider2,
+  //     title: 'History of the flags used in Ireland',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/fifth',
+  //   },
+  //   {
+  //     id: '3',
+  //     image: slider3,
+  //     title: 'What the Irish flag means to me',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/fourth',
+  //   },
+  //   {
+  //     id: '4',
+  //     image: slider2,
+  //     title: 'History of the flags used in Ireland',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/fifth',
+  //   },
 
-    {
-      id: '5',
-      image: slider3,
-      title: 'What the Irish flag means to me',
-      // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/fourth',
-    },
-  ];
+  //   {
+  //     id: '5',
+  //     image: slider3,
+  //     title: 'What the Irish flag means to me',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/fourth',
+  //   },
+  // ];
 
-  console.log(arrowBottom);
+  // console.log('currentMagazine->', currentMagazine);
   
 
   return (
@@ -95,9 +100,9 @@ const CarouselEighth = () => {
       {/* <div className="header">
         <h1 className="header--title">Welcome to the Ireland flag Institute</h1>
       </div> */}
-      {cards.map((item, i) => {
-        const indexLeft = mod(index - 1, cards.length);
-        const indexRight = mod(index + 1, cards.length);
+      {magazines.map((magazine: any, i: any) => {
+        const indexLeft = mod(index - 1, magazines.length);
+        const indexRight = mod(index + 1, magazines.length);
 
         let className = 'card';
 
@@ -112,41 +117,40 @@ const CarouselEighth = () => {
         }
 
         return (
-          <div key={item.id}>
+          <div 
+            key={magazine.id}
+            // onClick={() => setCurrentMagazine(magazine)}
+            onClick={(e) => {
+              e.preventDefault();
+              setCurrentMagazine(magazine);
+            }}
+          >
             <div className={className}>
               <div>
                 <h3 className="card--title">
-                  {item.title}
+                  {magazine.title}
                   <img src={arrowBottom.src} alt="" />
                 </h3>
                 
               </div>
-              <Link href={item.link}>
+              <Link href={''} >
                 <img
                   className="card--image"
-                  src={item.image.src}
-                  alt={item.title}
+                  src={magazine.featuredImage.node.mediaItemUrl}
+                  alt={magazine.title}
                 />
               </Link>
             </div>
           </div>
         );
       })}
-      {/* <span
-        onClick={() => setIndex(mod(index - 1, cards.length))}
-        className="nav nav--prev"
-      >
-        <img src={arrowLeft.src} alt="arrow left" className="nav--icon" />
-        Previous
-      </span>
-      <span
-        onClick={() => setIndex((index + 1) % cards.length)}
-        className="nav nav--next"
-      >
-        Next
-        <img src={arrowRight} alt="arrow right" className="nav--icon" />
-      </span> */}
+
+      {/* add flip magazine here */}
+      <div>
+
+      </div>
     </div>
+    
   );
 };
 

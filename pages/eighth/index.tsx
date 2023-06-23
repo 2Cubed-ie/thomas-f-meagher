@@ -11,6 +11,8 @@ import { wpgraphql } from "@/lib/wpgrapghql";
 import { NextPageContext } from 'next';
 import { GET_POSTS } from '@/gql/queries';
 import Image from 'next/image';
+import { useState } from 'react';
+import Ninth from '../ninth';
 
 
 
@@ -36,6 +38,7 @@ const contentPageSixth = [
 ];
 
 const Eighth = ({posts: serverPosts}: any) => {
+  const [currentMagazine, setCurrentMagazine] = useState();
   
   console.log('serverPosts', serverPosts);
 
@@ -50,19 +53,34 @@ const Eighth = ({posts: serverPosts}: any) => {
       </Head>
 
       <main className="eighth-page" >
-        <Header />
+      <Header />
 
-        <div>
-          <CarouselEighth />
+      {!currentMagazine
+      ? <>
+          <div>
+            <CarouselEighth magazines={serverPosts.posts.nodes} setCurrentMagazine={setCurrentMagazine} />
+          </div>
+
+          <div className="eighth-page-wrapper-info-block">
+            <InfoBlock text={'Click on the page to read the insert'} />
+          </div>
+      </>
+      : <>
+        <div className="eighth-page-wrapper-ninth">
+          <Ninth currentMagazine={currentMagazine} setCurrentMagazine={setCurrentMagazine} />
         </div>
+
+        <div className="eighth-page-wrapper-info-block-magazine">
+            <InfoBlock text={'Swipe Left or right to see the next Page'} />
+          </div>
+        </>
+      }
         
+
         <Footer 
           prevLink={'/seventh'} prevImage={seventhPageIcon.src.toString()}
-          nextLink={'/ninth'} nextImage={tenthPageIcon.src.toString()}
+          nextLink={'/tenth'} nextImage={tenthPageIcon.src.toString()}
         />
-        <div className="eighth-page-wrapper-info-block">
-          <InfoBlock text={'Click on the page to read the insert'} />
-        </div>
       </main>
     </>
   );
