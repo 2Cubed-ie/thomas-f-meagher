@@ -325,7 +325,7 @@ const Tenth = () => {
         
         
         <Footer 
-          prevLink={'/ninth'} prevImage={eighthPageIcon.src.toString()}
+          prevLink={'/eighth'} prevImage={eighthPageIcon.src.toString()}
           nextLink={'/second'} nextImage={secondPageIcon.src.toString()}
         />
       </main>
