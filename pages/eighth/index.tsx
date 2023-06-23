@@ -6,6 +6,21 @@ import seventhPageIcon from '../../assets/seventhPageIcon.png';
 import tenthPageIcon from '../../assets/ninthPageIcon.png';
 import Header from '@/components/Header/Header';
 import CarouselEighth from '@/components/Carousel-eighth/CarouselEighth';
+import InfoBlock from '@/components/InfoBlock/InfoBlock';
+import { wpgraphql } from "@/lib/wpgrapghql";
+import { NextPageContext } from 'next';
+import { GET_POSTS } from '@/gql/queries';
+import Image from 'next/image';
+
+
+
+export async function getServerSideProps({}: NextPageContext) {
+  const posts: any = await wpgraphql.request(GET_POSTS);
+
+  return {
+    props: {posts},
+  }
+}
 
 
 const contentPageSixth = [
@@ -20,7 +35,9 @@ const contentPageSixth = [
   {id: 9, name: 'Katie Taylor9', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: photo},
 ];
 
-const Eighth = () => {
+const Eighth = ({posts: serverPosts}: any) => {
+  
+  console.log('serverPosts', serverPosts);
 
   return (
     <>
@@ -32,7 +49,7 @@ const Eighth = () => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
 
-      <main className="eight-page" >
+      <main className="eighth-page" >
         <Header />
 
         <div>
@@ -43,6 +60,9 @@ const Eighth = () => {
           prevLink={'/seventh'} prevImage={seventhPageIcon.src.toString()}
           nextLink={'/ninth'} nextImage={tenthPageIcon.src.toString()}
         />
+        <div className="eighth-page-wrapper-info-block">
+          <InfoBlock text={'Click on the page to read the insert'} />
+        </div>
       </main>
     </>
   );
