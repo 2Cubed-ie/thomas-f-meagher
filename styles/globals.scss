@@ -217,52 +217,6 @@ a {
   // width: 25%;
 }
 
-.third-page {
-  background-color: #e46f25;
-  height: 100vh;
-  // justify-content: center;
-  // align-items: center;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.timeline-years {
-  // display: flex;
-  // flex-direction: column;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 2vw;
-  font-size: 1vw;
-  color: white;
-}
-
-.year h2 {
-  // display: flex;
-  // justify-content: flex-end;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  margin-bottom: -1.5vw;
-  margin-left: 1.3vw;
-  font-size: 1.5vw;
-  color: white;
-}
-
-.year {
-  display: grid;
-  grid-auto-flow: row;
-}
-
-.slick-slider {
-  max-width: 3840px;
-}
-
-.point {
-  // position: relative;
-}
-
 .header {
   padding-top: 1%;
 }
@@ -287,7 +241,7 @@ a {
 .timeline-line-bottom {
   position: absolute;
   width: 100%;
-  top: 52%;
+  top: 50%;
 }
 
 .fourth-page {
@@ -807,4 +761,221 @@ a {
   bottom: 6vw;
   position: absolute;
   z-index: 1;
+}
+
+.swiper-slide {
+  font-size: 2vw;
+}
+
+.year-num {
+  font-size: 2vw;
+}
+
+
+.third-page {
+  background-color: #e46f25;
+  height: 100vh;
+  // justify-content: center;
+  // align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.timeline-years {
+  // display: flex;
+  // flex-direction: column;
+  // display: grid;
+  // grid-auto-flow: column;
+  // gap: 2vw;
+  font-size: 1vw;
+  color: white;
+  grid-template-columns: repeat(204, 1fr);
+
+  // flex
+
+  display: flex;
+  // justify-content: flex-start;
+  justify-content: space-around;
+  // overflow-x: auto;
+  // scroll-snap-type: x mandatory;
+  scroll-padding: 0 20%;
+  align-items: center;
+  margin-left: -2vw;
+
+  // end flex
+}
+
+.year h2 {
+  // display: flex;
+  // justify-content: flex-end;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  margin-bottom: -1.5vw;
+  
+  font-size: 1.1vw;
+  font-weight: 400;
+  color: white;
+
+  // commited for flex
+  // margin-left: 1.3vw;
+
+  left: 2vw;
+  position: relative;
+}
+
+.year {
+
+  // commited for flex
+  // display: grid;
+  // grid-auto-flow: row;
+  // position: absolute;
+}
+
+.slick-slider {
+  max-width: 3840px;
+}
+
+.point {
+  // position: relative;
+}
+
+.year.active {
+  // commited for flex
+  // position: relative;
+  // top: 0;
+  // z-index: 1;
+}
+
+.point-year.active {
+  position: relative;
+  z-index: 1;
+}
+
+.year.active img {
+  border-radius: 50%;
+  width: 1000px;
+  height: auto;
+  // transition: all .4s ease-in-out;
+  // transform-origin: center;
+  animation: fadeIn 1s;
+
+  filter: drop-shadow(0px 10.3349px 90.4304px rgba(0, 0, 0, 0.25));
+}
+
+.year {
+  top:47%;
+}
+
+.year-wrapper {
+  // position: relative;
+}
+
+.point-year img{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  animation: fadeIn 1s;
+}
+
+.point-year {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 50px;
+  // height: 50px;
+  // margin-right: 10px;
+  scroll-snap-align: center;
+
+  // center
+
+  top: 165px;
+  position: relative;
+  z-index: 1;
+}
+
+img.point-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.year-wrapper:has(>  .active) {
+  height: 1160px;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+// @keyframes fadeOut {
+//   0% { opacity: 0; }
+//   100% { opacity: 1; }
+// }
+
+.point-year-info-block {
+  animation: fadeIn 3s;
+  position: absolute;
+  bottom: -9vw;
+  left: 19vw;
+  width: 700px;
+  border-radius: 50%;
+  background: white;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1.5vw;
+  text-align: center;
+  color: #000000;
+  gap: 0.5vw;
+}
+
+.point-year-info-block-year {
+  color: #e46e24;
+  font-size: 2vw;
+}
+
+.point-year-info-block-title {
+  font-size: 1.5vw;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.point-year-info-block-text {
+  font-size: 0.75vw;
+}
+
+.third-page-carousel {
+  margin-top: -5vw;
+}
+
+.point-year-info-block-shift {
+  left: 10vw;
+}
+
+.previous img,
+.next img{
+  position: absolute;
+  top: -3vw;
+  // z-index: 2;
+}
+
+.timeline {
+  width: 98vw;
+}
+
+// .point-icon {
+//   z-index: 1;
+// }
+
+.point-icon-wrapper {
+  z-index: 1;
+}
+
+.prev-next-wrapper {
+  z-index: 2;
 }

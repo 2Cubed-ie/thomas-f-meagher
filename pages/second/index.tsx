@@ -70,7 +70,7 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <main className={`${styles.main} second-page`} >
+      <main className={`${styles.main} second-page fade-enter`} >
         <Carousel />  
         {/* <Swiper
       spaceBetween={50}

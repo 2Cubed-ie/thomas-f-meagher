@@ -6,6 +6,7 @@ import slider3 from './img/magazine-3.png';
 import arrowBottom from '../../assets/arrow-bottom.svg';
 import Link from 'next/link';
 import Ninth from '@/pages/ninth';
+import Image from 'next/image';
 
 const CarouselEighth = ({
   magazines,
@@ -134,10 +135,12 @@ const CarouselEighth = ({
                 
               </div>
               <Link href={''} >
-                <img
+                <Image
                   className="card--image"
                   src={magazine.featuredImage.node.mediaItemUrl}
                   alt={magazine.title}
+                  width={920}
+                  height={1230}
                 />
               </Link>
             </div>
