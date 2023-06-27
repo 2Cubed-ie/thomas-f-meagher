@@ -126,7 +126,7 @@ a {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .first-page-block {
@@ -263,7 +263,7 @@ a {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  justify-content: end;
+  justify-content: flex-end;
   height: 100vh;
   display: flex;
   justify-content: space-between;
@@ -369,7 +369,7 @@ a {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  justify-content: end;
+  justify-content: flex-end;
   height: 100vh;
   display: flex;
   justify-content: space-between;
@@ -381,7 +381,7 @@ a {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  justify-content: end;
+  justify-content: flex-end;
   height: 100vh;
   display: flex;
   justify-content: space-between;
@@ -411,7 +411,7 @@ a {
   right: 9vw;
   display: grid;
   grid-template-columns: 1fr 15vw;
-  align-items: end;
+  align-items: flex-end;
   gap: 1vw;
 }
 

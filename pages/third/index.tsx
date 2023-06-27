@@ -28,83 +28,54 @@ import CarouselSecond from '@/components/Carousel-second/CarouselSecond';
 import CarouselThird from '@/components/CarouselThird/CarouselThird';
 import Link from 'next/link';
 import Header from '@/components/Header/Header';
+import { GET_TIMELINE_POSTS } from '@/gql/queries';
 
-const GetAllPosts = gql`
-  query getPosts {
-    posts {
-      nodes {
-        id
-        slug
-        title
-        uri
-      }
-    }
+export async function getServerSideProps({}: NextPageContext) {
+  const timelinePosts: any = await wpgraphql.request(GET_TIMELINE_POSTS);
+
+  return {
+    props: {timelinePosts},
   }
-`;
-
-type One = {
-  posts: Nodes
 }
 
-type Nodes = {
-  nodes: Posts
-}
+export default function Third({ timelinePosts: serverTimelinePosts }: any) {
 
-type Posts = {
-  map(arg0: (post: { title: string; id: string; }) => JSX.Element): import("react").ReactNode;
-  length: number;
-  id: string
-  slug: string
-  title: string
-  uri: string
-}
-
-interface PostsPageProps {
-  posts:One;
-}
-
-const pointsTimelineData = [
-  {year: 1821, header: 'a timeline Of Thomas F. Meagher and the Irish Flag', title: 'Lorem ipsum dollar, Lorem ipsum dollar', image: timeLineImage, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.'},
-  {year: 1896, header: 'a timeline Of Thomas F. Meagher and the Irish Flag', title: 'Lorem ipsum dollar', image: timeLineImage},
-  {year: 1916, header: 'a timeline Of Thomas F. Meagher and the Irish Flag', title: 'Lorem ipsum dollar', image: timeLineImage, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.'},
-  {year: 1911, header: 'a timeline Of Thomas F. Meagher and the Irish Flag', title: 'Lorem ipsum dollar', image: timeLineImageLeft, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.'},
-  {year: 2001, header: 'a timeline Of Thomas F. Meagher and the Irish Flag', title: 'Lorem ipsum dollar', image: timeLineImageRight, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.'},
-  {year: 1989, header: 'a timeline Of Thomas F. Meagher and the Irish Flag', title: 'Lorem ipsum dollar', image: timeLineImageRight, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.'},
-  {year: 2013, header: 'a timeline Of Thomas F. Meagher and the Irish Flag', title: 'Lorem ipsum dollar', image: timeLineImageRight, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.'},
-];
-
-export default function Third({ posts: serverPosts }: PostsPageProps) {
+const sortedPointsTimeline = serverTimelinePosts.timelinePosts.nodes
+    .map((post: any) => Number(post.timeLineFields.year))
+    .sort((a: number, b: number) => a - b);
 
   const timeline = [1820, 2023];
   const timelineDecades: any[] | (() => any[]) = [];
+
   for (let i = timeline[0]; i <= timeline[1]; i++) {
     timelineDecades.push(i);
   }
 
-  const [tDecades, setTDecades] = useState(timelineDecades); 
-  const [pointsTimeline, setPointsTimeine] = useState([1821, 1896, 1916, 1911, 2013, 1989, 2001]);
+  // const [tDecades, setTDecades] = useState(timelineDecades); 
   const [currentIndex, setCurrentIndex] = useState(0)
   const timelineRef = useRef(null);
-  const copyPointsTimeline = [...pointsTimeline].sort((a, b) => a - b);
+
+  // const [pointsTimeline, setPointsTimeine] = useState([1821, 1896, 1916, 1911, 2013, 1989, 2001]);
+  // const copyPointsTimeline = [...pointsTimeline].sort((a, b) => a - b);
   const [selectedPoint, setSelectedPoint] = useState(1916);
-  const [prevSelectedPoint, setPrevSelectedPoint] = useState(copyPointsTimeline[copyPointsTimeline.indexOf(selectedPoint) - 1]);
-  const [nextSelectedPoint, setNextSelectedPoint] = useState(copyPointsTimeline[copyPointsTimeline.indexOf(selectedPoint) + 1]);
+  const [prevSelectedPoint, setPrevSelectedPoint] = useState(sortedPointsTimeline[sortedPointsTimeline.indexOf(selectedPoint) - 1]);
+  const [nextSelectedPoint, setNextSelectedPoint] = useState(sortedPointsTimeline[sortedPointsTimeline.indexOf(selectedPoint) + 1]);
   
   const handlePointClick = (pointId: any) => {
     setSelectedPoint(pointId);
   
-    const index = copyPointsTimeline.indexOf(pointId)
+    const index = sortedPointsTimeline.indexOf(pointId)
     
-    setPrevSelectedPoint(copyPointsTimeline[index - 1]);
-    setNextSelectedPoint(copyPointsTimeline[index + 1]);
+    setPrevSelectedPoint(sortedPointsTimeline[index - 1]);
+    setNextSelectedPoint(sortedPointsTimeline[index + 1]);
   };  
 
   const handleClickNextPoint = () => {
-    if (copyPointsTimeline.indexOf(selectedPoint) === copyPointsTimeline.length - 1) {
-      return handlePointClick(copyPointsTimeline[0]);
+    if (sortedPointsTimeline.indexOf(selectedPoint) === sortedPointsTimeline.length - 1) {
+      return handlePointClick(sortedPointsTimeline[0]);
     }
 
-    handlePointClick(copyPointsTimeline[copyPointsTimeline.indexOf(selectedPoint) + 1])
+    handlePointClick(sortedPointsTimeline[sortedPointsTimeline.indexOf(selectedPoint) + 1])
 }
 
   useEffect(() => {
@@ -135,25 +106,12 @@ export default function Third({ posts: serverPosts }: PostsPageProps) {
             className="timeline"
           >
             <div className="timeline-years">
-            {tDecades.map((decade, index) => {
-              if (decade % 10 === 0 && !pointsTimeline.includes(decade)) {
+            {timelineDecades.map((decade, index) => {
+              if (decade % 10 === 0 && !sortedPointsTimeline.includes(decade)) {
                 return (
                   <div key={decade} className="year-wrapper">
                     <div
                       className={`year year-${decade}`}
-                      style={
-                        currentIndex > 0
-                          ? {
-                              transform: `translateX(-${currentIndex * 100}%)`,
-                              transitionProperty: 'transform',
-                              transitionDuration: '0.5s',
-                            }
-                          : {
-                              transform: `translateX(${ -currentIndex * 100 }%)`,
-                              transitionProperty: 'transform',
-                              transitionDuration: '0.5s',
-                            }
-                      }
                     >
                       <h2>{decade}</h2>
                       <div className="timeline-line">
@@ -169,7 +127,7 @@ export default function Third({ posts: serverPosts }: PostsPageProps) {
               else {
                 return (
                   <div key={decade} className="year-wrapper">
-                    {pointsTimeline.includes(decade) && 
+                    {sortedPointsTimeline.includes(decade) && 
                     <div 
                       className={`point-year year year-${decade} 
                         ${selectedPoint === decade && 'active'} 
@@ -178,15 +136,16 @@ export default function Third({ posts: serverPosts }: PostsPageProps) {
                       }
                     >
                       <div ref={timelineRef} onClick={() => handlePointClick(decade)}>
-                        {pointsTimelineData
-                          .filter(point => point.year === decade)
-                          .map((yearData, index) => {
+                        {/* {pointsTimelineData */}
+                        {serverTimelinePosts.timelinePosts.nodes
+                          .filter((point: any) => Number(point.timeLineFields.year) === decade)
+                          .map((yearData: any, index: any) => {
                             if(selectedPoint === decade) {
                               return (
-                                <>
+                                <div key={yearData.id}>
                                 <div className="point-year-header">
                                   <h3 className="point-year-header-title">
-                                    {yearData.header}
+                                    {yearData.title}
                                   </h3>
                                   <Image 
                                     src={arrowBottomWhite.src}
@@ -196,22 +155,39 @@ export default function Third({ posts: serverPosts }: PostsPageProps) {
                                     className="point-year-header-icon"
                                   />
                                 </div>
-                                  <img key={index} src={yearData.image.src} alt=''/>
+                                  <Image src={yearData.featuredImage.node.mediaItemUrl} alt='' width={1000} height={1000} />
                                   <div className={`point-year-info-block ${decade > 1989 && 'point-year-info-block-shift'}`}>
-                                    <h3 className="point-year-info-block-year">{yearData.year}</h3>
-                                    <p className="point-year-info-block-title">{yearData.title}</p>
-                                    <p className="point-year-info-block-text">{yearData.text}</p>
+                                    <h3 className="point-year-info-block-year">{yearData.timeLineFields.year}</h3>
+                                    <p className="point-year-info-block-title">{yearData.timeLineFields.subtitle}</p>
+                                    <p className="point-year-info-block-text">{yearData.timeLineFields.text}</p>
                                   </div>
-                                </>
+                                </div >
                               )
                             }
                             if( prevSelectedPoint === decade || nextSelectedPoint === decade) {
-                              return <div key={index}><img src={yearData.image.src} alt='' className="prev-next-wrapper"/></div>
+                              return <div key={yearData.id} >
+                                  <Image 
+                                    src={yearData.featuredImage.node.mediaItemUrl} 
+                                    alt=''
+                                    className="prev-next-wrapper"
+                                    width={200}
+                                    height={200}
+                                  />
+                                </div>
                             }
                             else {
-                              return <div className="point-icon-wrapper" key={index}><img src={pointIcon.src} alt='' className="point-icon"/></div>
+                              return <div className="point-icon-wrapper" key={yearData.id}>
+                                <Image 
+                                  src={pointIcon.src} 
+                                  alt='' 
+                                  className="point-icon"
+                                  width={30}
+                                  height={30}
+                                />
+                              </div>
                             }
-                          })}
+                          })
+                        }
                       </div>
                     </div>
                     }
@@ -240,10 +216,10 @@ export default function Third({ posts: serverPosts }: PostsPageProps) {
   );
 }
 
-export async function getServerSideProps({}: NextPageContext) {
-  const posts: any = await wpgraphql.request(GetAllPosts);
+// export async function getServerSideProps({}: NextPageContext) {
+//   const posts: any = await wpgraphql.request(GetAllPosts);
 
-  return {
-    props: {posts},
-  }
-}
+//   return {
+//     props: {posts},
+//   }
+// }

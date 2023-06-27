@@ -29,3 +29,22 @@ query getPosts {
   }
 }`
 
+export const GET_TIMELINE_POSTS = gql `query getTimelinePosts {
+  timelinePosts {
+    nodes {
+      id
+      title
+      timeLineFields {
+        subtitle
+        text
+        year
+      }
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
+    }
+  }
+}`
+
