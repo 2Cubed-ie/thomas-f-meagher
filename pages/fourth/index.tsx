@@ -36,12 +36,8 @@ export async function getServerSideProps({}: NextPageContext) {
 }
 
 export default function Fourth({sliderData: serverSliderData}: any) {
-
-  console.log('serverSliderData 4', serverSliderData.page.fourthPage.listFamousPeopleAboutFlag);
-
-  const famousFaces = serverSliderData.page.fourthPage.listFamousPeopleAboutFlag;
   
-  
+  const famousFaces = serverSliderData.page.fourthPage.listFamousPeopleAboutFlag; 
   const [index, setIndex] = useState(0);
   const [startX, setStartX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);

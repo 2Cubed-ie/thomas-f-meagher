@@ -86,3 +86,18 @@ export const GET_FOURTH_PAGE_DATA = gql`query getFourthPageData {
     }
   }
 }`
+
+export const GET_FLAGS_DATA = gql`query getFlagsData {
+  flags {
+    nodes {
+      id
+      title
+      excerpt
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
+    }
+  }
+}`

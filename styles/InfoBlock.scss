@@ -29,9 +29,13 @@
 
 .fifth-page-wrapper-info-block {
   position: absolute;
-  top: 50%;
-  left: 80%;
-  width: 95%;
+    top: 50%;
+    right: 5px;
+}
+
+.fifth-page-wrapper-info-block > .info-block {
+  max-width: 100%;
+  width: 19vw;
 }
 
 .eighth-page-wrapper-info-block {

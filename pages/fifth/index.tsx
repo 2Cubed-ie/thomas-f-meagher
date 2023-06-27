@@ -24,26 +24,21 @@ import flag10 from '../../assets/flags/flag-10.svg';
 import flag11 from '../../assets/flags/flag-11.svg';
 import Image from 'next/image';
 import InfoBlock from '@/components/InfoBlock/InfoBlock';
+import { GET_FLAGS_DATA } from '@/gql/queries';
 
+export async function getServerSideProps({}: NextPageContext) {
+  const sliderData: any = await wpgraphql.request(GET_FLAGS_DATA);
 
-const contentPageFifth = [
-  {id: 1, title: 'British Royal Standard', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', photo: flag1},
-  {id: 2, title: 'British Royal Standard2',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', photo:  flag2},
-  {id: 3, title: 'British Royal Standard3',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag3},
-  {id: 4, title: 'British Royal Standard4',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag4},
-  {id: 5, title: 'British Royal Standard5',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag5},
-  {id: 6, title: 'British Royal Standard6',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag6},
-  {id: 7, title: 'British Royal Standard7',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag7},
-  {id: 8, title: 'British Royal Standard8',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag8},
-  {id: 9, title: 'British Royal Standard9',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag9},
-  {id: 10, title: 'British Royal Standard8',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag10},
-  {id: 11, title: 'British Royal Standard9',  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: flag11},
-];
+  return {
+    props: {sliderData},
+  }
+}
 
+const Fifth = ({sliderData: serverSliderData}: any) => {
+  console.log('fifth', serverSliderData.flags.nodes);
 
-
-
-const Fifth = () => {
+  const contentPageFifth = serverSliderData.flags.nodes;
+  
 
   const [currentFlag, setCurrentFlag] = useState(1);
   const [changeImage, setChangeImage] = useState(false);
@@ -56,44 +51,12 @@ const Fifth = () => {
     setCurrentFlag(id);
   }
 
-  // const handleTouchStart = (event: any) => {
-  //   setStartX(event.touches[0].clientX);
-  //   // setIsSwiping(true);
-  // };
-
-  // const handleTouchMove = (event: any) => {
-  //   const currentX = event.touches[0].clientX;
-  //   const diff = startX - currentX;
-  //   const threshold = 50; // adjust this value to control swipe sensitivity
-
-
-  //   if (diff > threshold) {
-  //     // swipe left
-
-  //     if(currentFlag === contentPageFifth.length){
-  //       setCurrentFlag(contentPageFifth.length);  
-  //     }
-
-  //     setCurrentFlag(currentFlag => currentFlag + 1);
-  //   } else if (diff < -threshold) {
-  //     // swipe right
-  //     setCurrentFlag(currentFlag => currentFlag - 1);
-  //   }
-  // };
-
-
   useEffect(() => {
     setTimeout(() => {
       setChangeImage(false);
     }, 500)
     
   }, [changeImage])
-
-  
-  
-
-  console.log('setChangeImage', currentFlag);
-  
   
   return (
     <>
@@ -116,9 +79,11 @@ const Fifth = () => {
           <div 
             className={`fifth-page-banner-left ${changeImage === false ? 'fade-in show' : 'fade-in'}`}
           >
-            <img
-              src={contentPageFifth[currentFlag].photo.src}
+            <Image
+              src={contentPageFifth[currentFlag].featuredImage.node.mediaItemUrl}
               alt=""
+              width={950}
+              height={590}
             />
             
           </div>
@@ -127,19 +92,20 @@ const Fifth = () => {
               {contentPageFifth[currentFlag].title}
             </h2>
             <p className="fifth-page-banner-rigth-text">
-              {contentPageFifth[currentFlag].text}
+              {contentPageFifth[currentFlag].excerpt.replace(/<\/?p>/g, '')}
             </p>
             
           </div>
         </div>
         <div className="fifth-page-flags-navigarion">
-          {contentPageFifth.map(item => 
+          {contentPageFifth.map((item: any, index: any) => 
             <div key={item.id} className="fifth-page-flags-img">
-              <a href="" onClick={(e: any) => chooseFlag(e, item.id - 1)}>
-                <img
-                  src={item.photo.src}
+              <a href="" onClick={(e: any) => chooseFlag(e, (index + 1) - 1)}>
+                <Image
+                  src={item.featuredImage.node.mediaItemUrl}
                   alt=''
-                  // fill
+                  width={161}
+                  height={100}
                 />
               </a>
             </div>
