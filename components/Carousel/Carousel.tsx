@@ -5,11 +5,15 @@ import slider2 from '../../assets/s-p-sl-3.png';
 import slider3 from '../../assets/slider-3.webp';
 import arrowBottom from '../../assets/arrow-bottom.svg';
 import Link from 'next/link';
+import Image from 'next/image';
 
-const Carousel = () => {
+const Carousel = (sliderData: any) => {
   const [index, setIndex] = useState(0);
   const [startX, setStartX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
+
+  console.log('sliderData=>', sliderData.sliderData);
+  
 
   const mod = (n: any, m: any) => {
     const result = n % m;
@@ -39,32 +43,56 @@ const Carousel = () => {
     setIsSwiping(false);
   };
 
+  // const cards = [
+  //   {
+  //     id: '1',
+  //     image: slider1,
+  //     title: 'Let’s Take a look at the History of Thomas F. Meagher and The Irish flag',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/third',
+  //   },
+  //   {
+  //     id: '2',
+  //     image: slider2,
+  //     title: 'History of the flags used in Ireland',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/fifth',
+  //   },
+  //   {
+  //     id: '3',
+  //     image: slider3,
+  //     title: 'What the Irish flag means to me',
+  //     // eslint-disable-next-line max-len
+  //     caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
+  //     link: '/fourth',
+  //   },
+  // ];
+
   const cards = [
-    {
-      id: '1',
-      image: slider1,
-      title: 'Let’s Take a look at the History of Thomas F. Meagher and The Irish flag',
+      {
+      id: sliderData.sliderData.firstSliderImage.id,
+      image: sliderData.sliderData.firstSliderImage.mediaItemUrl,
+      title: sliderData.sliderData.firstSliderTitle,
       // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/third',
+      link: sliderData.sliderData.firstSliderLink,
     },
     {
-      id: '2',
-      image: slider2,
-      title: 'History of the flags used in Ireland',
+      id: sliderData.sliderData.secondSliderImage.id,
+      image: sliderData.sliderData.secondSliderImage.mediaItemUrl,
+      title: sliderData.sliderData.secondSliderTitle,
       // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/fifth',
+      link: sliderData.sliderData.secondSliderLink,
     },
     {
-      id: '3',
-      image: slider3,
-      title: 'What the Irish flag means to me',
+      id: sliderData.sliderData.thirdSliderImage.id,
+      image: sliderData.sliderData.thirdSliderImage.mediaItemUrl,
+      title: sliderData.sliderData.thirdSliderTitle,
       // eslint-disable-next-line max-len
-      caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.',
-      link: '/fourth',
+      link: sliderData.sliderData.thirdSliderLink,
     },
-  ];
+  ]
 
   console.log(arrowBottom);
   
@@ -104,10 +132,12 @@ const Carousel = () => {
                 </h3>
                 
               </div>
-              <img
+              <Image
                 className="card--image"
-                src={item.image.src}
+                src={item.image}
                 alt={item.title}
+                width={858}
+                height={858}
               />
               
                 <div className="second-page-block-btn">

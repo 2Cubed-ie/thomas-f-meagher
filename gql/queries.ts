@@ -48,3 +48,27 @@ export const GET_TIMELINE_POSTS = gql `query getTimelinePosts {
   }
 }`
 
+export const GET_SECOND_PAGE_DATA = gql`query getSecondPageData {
+  page(id: "2", idType: DATABASE_ID) {
+    secondPageSliders {
+      firstSliderImage {
+        mediaItemUrl
+        id
+      }
+      firstSliderLink
+      firstSliderTitle
+      secondSliderImage {
+        mediaItemUrl
+        id
+      }
+      secondSliderLink
+      secondSliderTitle
+      thirdSliderImage {
+        mediaItemUrl
+        id
+      }
+      thirdSliderLink
+      thirdSliderTitle
+    }
+  }
+}`

@@ -11,55 +11,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import { GET_SECOND_PAGE_DATA } from '@/gql/queries';
 
-const GetAllPosts = gql`
-  query getPosts {
-    posts {
-      nodes {
-        id
-        slug
-        title
-        uri
-      }
-    }
+export async function getServerSideProps({}: NextPageContext) {
+  const sliderData: any = await wpgraphql.request(GET_SECOND_PAGE_DATA);
+
+  return {
+    props: {sliderData},
   }
-`;
-
-// const data = wpgraphql.request(GetAllPosts);
-
-// const getAllPosts = async () => {
-//   const { posts } = await wpgraphql.request(GetAllPosts);
-//   console.log(posts);
-//   return posts;
-// };
-
-// getAllPosts();
-
-type One = {
-  posts: Nodes
 }
 
-type Nodes = {
-  nodes: Posts
-}
 
-type Posts = {
-  map(arg0: (post: { title: string; id: string; }) => JSX.Element): import("react").ReactNode;
-  length: number;
-  id: string
-  slug: string
-  title: string
-  uri: string
-}
+export default function Home({ sliderData: serverSliderData }: any) {
 
-interface PostsPageProps {
-  posts:One;
-}
-
-export default function Home({ posts: serverPosts }: PostsPageProps) {
-  const [postsList, setPostsList] = useState(serverPosts.posts.nodes);
-
-  console.log('serverPosts.id', serverPosts);
+  // console.log('sliderData=>', serverSliderData.page.secondPageSliders);
 
   return (
     <>
@@ -71,28 +36,10 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <main className={`${styles.main} second-page fade-enter`} >
-        <Carousel />  
-        {/* <Swiper
-      spaceBetween={50}
-      slidesPerView={3}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-      ...
-    </Swiper> */}
+        <Carousel 
+          sliderData={serverSliderData.page.secondPageSliders}
+        />  
       </main>
     </>
   );
-}
-
-export async function getServerSideProps({}: NextPageContext) {
-  const posts: any = await wpgraphql.request(GetAllPosts);
-
-  return {
-    props: {posts},
-  }
 }
