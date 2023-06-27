@@ -72,3 +72,17 @@ export const GET_SECOND_PAGE_DATA = gql`query getSecondPageData {
     }
   }
 }`
+
+export const GET_FOURTH_PAGE_DATA = gql`query getFourthPageData {
+  page(id: "116", idType: DATABASE_ID) {
+    fourthPage {
+      listFamousPeopleAboutFlag {
+        id
+        caption
+        description
+        title
+        mediaItemUrl
+      }
+    }
+  }
+}`

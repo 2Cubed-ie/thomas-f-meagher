@@ -25,25 +25,23 @@ import fifthPageIcon from '../../assets/fifthPageIcon.png';
 import Header from '@/components/Header/Header';
 import InfoBlock from '@/components/InfoBlock/InfoBlock';
 
+import { GET_FOURTH_PAGE_DATA } from '@/gql/queries';
 
-const famousFaces = [
-  // first image id 1
-  {id: 1, name: 'Micheal D Higgins', position: 'President', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: photo},
-  {id: 2, name: 'Katie Taylor2', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: famousFour},
-  {id: 3, name: 'Katie Taylor3', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: famousFive},
-  {id: 4, name: 'Katie Taylor4', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: famousSix},
-  {id: 5, name: 'Katie Taylor5', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: famousSeven},
-  //first from left id 6
-  {id: 6, name: 'Micheal D Higgins', position: 'President', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: higgins},
-  {id: 7, name: 'President McAleese', position: 'The eighth president ', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: famousOne},
-  {id: 8, name: 'Katie Taylor8', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: famousTwo},
-  {id: 9, name: 'Katie Taylor9', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: famousThree},
-];
+export async function getServerSideProps({}: NextPageContext) {
+  const sliderData: any = await wpgraphql.request(GET_FOURTH_PAGE_DATA);
 
+  return {
+    props: {sliderData},
+  }
+}
 
+export default function Fourth({sliderData: serverSliderData}: any) {
 
+  console.log('serverSliderData 4', serverSliderData.page.fourthPage.listFamousPeopleAboutFlag);
 
-export default function Fourth() {
+  const famousFaces = serverSliderData.page.fourthPage.listFamousPeopleAboutFlag;
+  
+  
   const [index, setIndex] = useState(0);
   const [startX, setStartX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
@@ -113,7 +111,7 @@ export default function Fourth() {
                 />
               </div>
             ))} */}
-            {famousFaces.map((item, i) => {
+            {famousFaces.map((item: any, i: any) => {
         const indexLeft = mod(index - 1, famousFaces.length);
         const indexLeftPrevOne = mod(index - 2, famousFaces.length);
         const indexLeftPrevTwo = mod(index - 3, famousFaces.length);
@@ -164,21 +162,22 @@ export default function Fourth() {
               </h3>
             </div>
             }
-              <img
+              <Image
                 className="card-people--image"
-                src={item.photo.src}
+                src={item.mediaItemUrl}
                 alt={item.name}
-                // fill
+                width={338}
+                height={338}
               />
 
               {i !== index &&
-                <div className="card-people--caption--name-secondary">{item.name}</div>
+                <div className="card-people--caption--name-secondary">{item.title.replace(/<\/?p>/g, '')}</div>
               }
               {i === index &&
                 <div className="card-people--caption">
-                <div className="card-people--caption--name">{item.name}</div>
-                <div className="card-people--caption--position">{item.position}</div>
-                <div className="card-people--caption--words">{item.words}</div>
+                <div className="card-people--caption--name">{item.title.replace(/<\/?p>/g, '')}</div>
+                <div className="card-people--caption--position">{item.caption.replace(/<\/?p>/g, '')}</div>
+                <div className="card-people--caption--words">{item.description.replace(/<\/?p>/g, '')}</div>
               </div>
               }
             </div>
