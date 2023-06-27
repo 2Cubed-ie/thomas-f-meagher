@@ -979,3 +979,22 @@ img.point-icon {
 .prev-next-wrapper {
   z-index: 2;
 }
+
+.point-year > div .point-year-header-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.point-year-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.point-year-header-title {
+  width: 65%;
+  text-transform: uppercase;
+  text-align: center;
+  position: absolute;
+  top: -3vw;
+}
