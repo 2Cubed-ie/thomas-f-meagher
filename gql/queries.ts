@@ -101,3 +101,12 @@ export const GET_FLAGS_DATA = gql`query getFlagsData {
     }
   }
 }`
+
+export const GET_SIXTH_PAGE_DATA = `query getSixthPageData {
+  page(id: "155", idType: DATABASE_ID) {
+    sixthPage {
+      textNextToPlayButton
+      topRightText
+    }
+  }
+}`
