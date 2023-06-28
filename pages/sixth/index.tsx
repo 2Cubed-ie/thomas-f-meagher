@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import Footer from '@/components/Footer/Footer';
-import photo from '../../assets/slider-3.webp';
-import president from '../../assets/higgins.png';
 import fifthPageIcon from '../../assets/fifthPageIcon.png';
 import seventhPageIcon from '../../assets/seventhPageIcon.png';
 import playIcon from '../../assets/play-icon.svg';

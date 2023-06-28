@@ -3,22 +3,8 @@ import styles from '@/styles/Home.module.scss';
 import { gql, wpgraphql } from '../../lib/wpgrapghql';
 import { useState } from 'react';
 import { NextPageContext } from 'next';
-
-import Carousel from '@/components/Carousel/Carousel';
 import Footer from '@/components/Footer/Footer';
-import Link from 'next/link';
-import homeIcon from '../../assets/home-icon.svg';
 import Image from 'next/image';
-import CarouselThird from '@/components/CarouselThird/CarouselThird';
-import photo from '../../assets/slider-3.webp';
-import higgins from '../../assets/higgins.png';
-import famousOne from '../../assets/eigth-president.png'
-import famousTwo from '../../assets/famous-3.png'
-import famousThree from '../../assets/famous-4.png'
-import famousFour from '../../assets/famous-5.png'
-import famousFive from '../../assets/famous-6.png'
-import famousSix from '../../assets/famous-7.png'
-import famousSeven from '../../assets/famous-8.png'
 import arrowBottomWhite from '../../assets/arrow-bottom-white.svg';
 import thirdPageIcon from '../../assets/thirdPageIcon.png';
 import fifthPageIcon from '../../assets/fifthPageIcon.png';
@@ -36,7 +22,7 @@ export async function getServerSideProps({}: NextPageContext) {
 }
 
 export default function Fourth({sliderData: serverSliderData}: any) {
-  
+
   const famousFaces = serverSliderData.page.fourthPage.listFamousPeopleAboutFlag; 
   const [index, setIndex] = useState(0);
   const [startX, setStartX] = useState(0);
