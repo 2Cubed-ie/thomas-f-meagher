@@ -35,7 +35,6 @@ export async function getServerSideProps({}: NextPageContext) {
 }
 
 const Fifth = ({sliderData: serverSliderData}: any) => {
-  console.log('fifth', serverSliderData.flags.nodes);
 
   const contentPageFifth = serverSliderData.flags.nodes;
   

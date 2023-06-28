@@ -102,11 +102,26 @@ export const GET_FLAGS_DATA = gql`query getFlagsData {
   }
 }`
 
-export const GET_SIXTH_PAGE_DATA = `query getSixthPageData {
+export const GET_SIXTH_PAGE_DATA = gql`query getSixthPageData {
   page(id: "155", idType: DATABASE_ID) {
     sixthPage {
       textNextToPlayButton
       topRightText
+    }
+  }
+}`
+
+export const GET_SEVENTH_PAGE_DATA = gql`query getSeventhPageData {
+  page(id: "157", idType: DATABASE_ID) {
+    seventhPageFields {
+      centerImage {
+        mediaItemUrl
+      }
+      leftTopImage {
+        mediaItemUrl
+      }
+      leftTopText
+      rightText
     }
   }
 }`

@@ -8,7 +8,18 @@ import Header from '@/components/Header/Header';
 import Image from 'next/image';
 import centerImage from '../../assets/7-center-image.png'
 import leftImage from '../../assets/7-left-image.png'
+import { wpgraphql } from '@/lib/wpgrapghql';
+import { NextPageContext } from 'next';
+import { GET_SEVENTH_PAGE_DATA } from '@/gql/queries';
+import DOMPurify from 'isomorphic-dompurify';
 
+export async function getServerSideProps({}: NextPageContext) {
+  const data: any = await wpgraphql.request(GET_SEVENTH_PAGE_DATA);
+
+  return {
+    props: {data},
+  }
+}
 
 const contentPageSixth = [
   {id: 1, name: 'Micheal D Higgins', position: 'President', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: president},
@@ -22,7 +33,7 @@ const contentPageSixth = [
   {id: 9, name: 'Katie Taylor9', position: 'gold medal winner at the olympic games', words: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra aliquam leo, vel vestibulum leo tempor eu. Mauris dolor erat, convallis et aliquet et, efficitur mollis eros. Cras fringilla, ligula convallis ultricies accumsan, dui lacus malesuada mauris.', photo: photo},
 ];
 
-const Seventh = () => {
+const Seventh = ({data: serverData}: any) => {
 
   return (
     <>
@@ -40,38 +51,31 @@ const Seventh = () => {
         <div className="seventh-page-main">
           <div className="seventh-page-main-left">
             <Image
-              src={leftImage}
+              src={serverData.page.seventhPageFields.leftTopImage.mediaItemUrl}
+              width={700}
+              height={700}
               alt=''
               className="seventh-page-main-left-img"
             />
             <div className="seventh-page-main-left-caption">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Suspendisse convallis ac arcu ac mattis. 
-                Aliquam at blandit massa.
+                {serverData.page.seventhPageFields.leftTopText}
               </p>
             </div>
           </div>
 
           <div className="seventh-page-main-center">
             <Image
-              src={centerImage}
+              src={serverData.page.seventhPageFields.centerImage.mediaItemUrl}
               alt=''
               className="seventh-page-main-center-img"
+              width={1186}
+              height={1186}
             />
           </div>
 
           <div className="seventh-page-main-right">
-            <h2 className="seventh-page-main-right-title">
-              Seventh
-            </h2>
-            <p className="seventh-page-main-right-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis ac arcu ac mattis. Aliquam at blandit massa. Duis ac ligula eget justo ornare scelerisque sed eget dolor. Sed ullamcorper quam at sapien lacinia, nec venenatis elit rutrum. Duis fringilla velit a semper laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam vitae hendrerit diam. Duis purus mi, congue id efficitur in, eleifend ornare urna. Phasellus vehicula purus at leo malesuada vestibulum.
-            </p>
-            
-            <p className="seventh-page-main-right-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis ac arcu ac mattis. Aliquam at blandit massa. Duis ac ligula eget justo ornare scelerisque sed eget dolor. Sed ullamcorper quam at sapien lacinia, nec venenatis elit rutrum. Duis fringilla velit a semper laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam vitae hendrerit diam. Duis purus mi, congue id efficitur in, eleifend ornare urna. Phasellus vehicula purus at leo malesuada vestibulum.
-            </p>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(serverData.page.seventhPageFields.rightText) }} />
           </div>
         </div>
         

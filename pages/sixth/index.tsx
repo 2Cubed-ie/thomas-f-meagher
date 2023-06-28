@@ -21,10 +21,6 @@ export async function getServerSideProps({}: NextPageContext) {
   }
 }
 
-
-
-
-
 const Sixth = ({data: serverData}: any) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<any>(null);
