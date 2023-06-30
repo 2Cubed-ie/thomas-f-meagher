@@ -176,6 +176,8 @@ const Tenth = () => {
   }
 
   useEffect(() => {
+    document.body.style.background = '#5787cc';
+    
     if (showError) {
       const timeoutId = setTimeout(() => {
         setShowError(false);

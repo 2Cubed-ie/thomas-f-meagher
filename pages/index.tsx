@@ -60,6 +60,10 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
   // }, [])
 
   // console.log(screenWidth);
+
+  useEffect(() => {
+    document.body.style.background = '#9dc3ea';
+  }, []);
   
   
 

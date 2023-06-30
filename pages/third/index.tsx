@@ -80,6 +80,7 @@ const sortedPointsTimeline = serverTimelinePosts.timelinePosts.nodes
 
   useEffect(() => {
     const timeoutId = setTimeout(handleClickNextPoint, 7000); // Adjust the timeout duration as needed (e.g., 1000ms = 1 second)
+    document.body.style.background = '#e36f24';
 
     return () => {
       clearTimeout(timeoutId);

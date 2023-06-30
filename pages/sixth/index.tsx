@@ -5,7 +5,7 @@ import seventhPageIcon from '../../assets/seventhPageIcon.png';
 import playIcon from '../../assets/play-icon.svg';
 import pauseIcon from '../../assets/pause-icon.svg';
 import Header from '@/components/Header/Header';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { GET_SIXTH_PAGE_DATA } from '@/gql/queries';
 import { NextPageContext } from 'next';
@@ -22,6 +22,10 @@ export async function getServerSideProps({}: NextPageContext) {
 const Sixth = ({data: serverData}: any) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<any>(null);
+
+  useEffect(() =>{
+    document.body.style.background = 'white';
+  }, [])
   
   return (
     <>

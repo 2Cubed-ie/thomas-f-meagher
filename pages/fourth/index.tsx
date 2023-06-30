@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.scss';
 import { gql, wpgraphql } from '../../lib/wpgrapghql';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NextPageContext } from 'next';
 import Footer from '@/components/Footer/Footer';
 import Image from 'next/image';
@@ -55,6 +55,10 @@ export default function Fourth({sliderData: serverSliderData}: any) {
 
     setIsSwiping(false);
   };
+
+  useEffect(() => {
+    document.body.style.background = '#096723';
+  }, [])
   
   return (
     <>

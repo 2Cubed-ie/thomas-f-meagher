@@ -51,6 +51,7 @@ const Fifth = ({sliderData: serverSliderData}: any) => {
   }
 
   useEffect(() => {
+    document.body.style.background = '#e36f24';
     setTimeout(() => {
       setChangeImage(false);
     }, 500)

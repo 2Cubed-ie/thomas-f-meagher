@@ -8,7 +8,7 @@ import InfoBlock from '@/components/InfoBlock/InfoBlock';
 import { wpgraphql } from "@/lib/wpgrapghql";
 import { NextPageContext } from 'next';
 import { GET_POSTS } from '@/gql/queries';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Ninth from '../ninth';
 
 export async function getServerSideProps({}: NextPageContext) {
@@ -21,6 +21,10 @@ export async function getServerSideProps({}: NextPageContext) {
 
 const Eighth = ({posts: serverPosts}: any) => {
   const [currentMagazine, setCurrentMagazine] = useState();
+
+  useEffect(() => {
+    document.body.style.background = 'white';
+  }, [])
 
   return (
     <>

@@ -12,9 +12,6 @@ const Carousel = (sliderData: any) => {
   const [startX, setStartX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
 
-  console.log('sliderData=>', sliderData.sliderData);
-  
-
   const mod = (n: any, m: any) => {
     const result = n % m;
 
@@ -66,8 +63,6 @@ const Carousel = (sliderData: any) => {
       link: sliderData.sliderData.thirdSliderLink,
     },
   ]
-
-  console.log(arrowBottom);
   
 
   return (

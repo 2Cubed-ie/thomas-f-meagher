@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '@/styles/Home.module.scss';
 import { gql, wpgraphql } from '../../lib/wpgrapghql';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NextPageContext } from 'next';
 import Image from 'next/image';
 import sign from '../../assets/sign.svg';
@@ -22,9 +22,10 @@ export async function getServerSideProps({}: NextPageContext) {
 }
 
 
-export default function Home({ sliderData: serverSliderData }: any) {
-
-  // console.log('sliderData=>', serverSliderData.page.secondPageSliders);
+export default function Second ({ sliderData: serverSliderData }: any) {
+  useEffect(() =>{
+    document.body.style.background = 'white';
+  })
 
   return (
     <>

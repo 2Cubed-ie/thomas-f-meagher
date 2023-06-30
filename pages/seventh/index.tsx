@@ -8,6 +8,7 @@ import { wpgraphql } from '@/lib/wpgrapghql';
 import { NextPageContext } from 'next';
 import { GET_SEVENTH_PAGE_DATA } from '@/gql/queries';
 import DOMPurify from 'isomorphic-dompurify';
+import { useEffect } from 'react';
 
 export async function getServerSideProps({}: NextPageContext) {
   const data: any = await wpgraphql.request(GET_SEVENTH_PAGE_DATA);
@@ -18,6 +19,9 @@ export async function getServerSideProps({}: NextPageContext) {
 }
 
 const Seventh = ({data: serverData}: any) => {
+  useEffect(() => {
+    document.body.style.background = '#096723';
+  })
 
   return (
     <>
