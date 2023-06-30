@@ -119,7 +119,7 @@ const Tenth = () => {
     }
 
     if (value === 'space') {
-      setEmail(email => email + ' ')
+      setEmail(email => email + '')
       return
     }
 
