@@ -87,6 +87,7 @@ const Tenth = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   let usernameRef = email;
 
   if (email !== '') {
@@ -131,10 +132,16 @@ const Tenth = () => {
     console.log('!emailRegex.test(value)', !emailRegex.test(value));
     // (emailRegex.test(value))
     setShowError(!emailRegex.test(value));
+    // setIsSubmitting(false);
   }
 
   async function handleSubmit (e: React.FormEvent) {
     e.preventDefault();
+    if (isSubmitting) {
+      return; // Prevent multiple submissions
+    }
+    setIsSubmitting(true);
+
     validateEmail(email);
     console.log(showError);
     
@@ -171,6 +178,7 @@ const Tenth = () => {
 
     // alert(result.message);
     setShowSuccess(true);
+    setIsSubmitting(false);
 
     setEmail('');
   }
@@ -181,6 +189,7 @@ const Tenth = () => {
     if (showError) {
       const timeoutId = setTimeout(() => {
         setShowError(false);
+        setIsSubmitting(false);
       }, 3000);
   
       return () => {
@@ -232,7 +241,7 @@ const Tenth = () => {
               ref={inputRef}
             />
             <div className={`error-message ${showError ? "smooth" : ''}`}>Please enter a valid email address.</div>
-             <button type="submit" className="tenth-page-main-form-btn">submit</button>
+             <button type="submit" className="tenth-page-main-form-btn" disabled={isSubmitting}>submit</button>
             </form>
           </div>
           <div className="tenth-page-main-keyboard">
