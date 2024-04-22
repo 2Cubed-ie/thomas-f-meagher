@@ -1022,3 +1022,20 @@ img.point-icon {
   transform: translateY(-100%);
   transition: opacity 0ms ease-out, transform 0ms ease-out;
 }
+
+.fifth-page-title {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.fifth-page-title h3 {
+  color: #ffffff;
+  font-size: 53px;
+  line-height: 58px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.fifth-page-title img {
+  margin: 0 auto;
+}

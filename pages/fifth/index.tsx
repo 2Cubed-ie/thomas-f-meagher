@@ -11,6 +11,7 @@ import president from '../../assets/higgins.png';
 import fourthPageIcon from '../../assets/fourthPageIcon.png';
 import sixthPageIcon from '../../assets/sixthPageIcon.png';
 import Header from '@/components/Header/Header';
+import arrowBottomWhite from '../../assets/arrow-bottom-white.svg';
 import flag1 from '../../assets/flags/flag-1.svg';
 import flag2 from '../../assets/flags/flag-2.svg';
 import flag3 from '../../assets/flags/flag-3.svg';
@@ -69,6 +70,18 @@ const Fifth = ({sliderData: serverSliderData}: any) => {
       </Head>
       <main className="fifth-page" >
       <Header />
+
+      <div className="fifth-page-title">
+        <h3>
+        The flags of Ireland <br/> throughout history
+        </h3>
+        <Image 
+          src={arrowBottomWhite.src}
+          alt=""
+          width={88}
+          height={102}
+        />
+      </div>
 
       <div className="fifth-page-flags" 
       >
