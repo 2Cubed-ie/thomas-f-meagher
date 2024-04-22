@@ -129,7 +129,8 @@ const CarouselEighth = ({
             <div className={className}>
               <div>
                 <h3 className="card--title">
-                  {magazine.title}
+                  {/* {magazine.title} */}
+                  The Irish independent <br/> People’s flag insert
                   <img src={arrowBottom.src} alt="" />
                 </h3>
                 
