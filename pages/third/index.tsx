@@ -44,7 +44,7 @@ const sortedPointsTimeline = serverTimelinePosts.timelinePosts.nodes
     .map((post: any) => Number(post.timeLineFields.year))
     .sort((a: number, b: number) => a - b);
 
-  const timeline = [1820, 2023];
+  const timeline = [1820, 1910];
   const timelineDecades: any[] | (() => any[]) = [];
 
   for (let i = timeline[0]; i <= timeline[1]; i++) {
@@ -57,7 +57,7 @@ const sortedPointsTimeline = serverTimelinePosts.timelinePosts.nodes
 
   // const [pointsTimeline, setPointsTimeine] = useState([1821, 1896, 1916, 1911, 2013, 1989, 2001]);
   // const copyPointsTimeline = [...pointsTimeline].sort((a, b) => a - b);
-  const [selectedPoint, setSelectedPoint] = useState(1916);
+  const [selectedPoint, setSelectedPoint] = useState(1823);
   const [prevSelectedPoint, setPrevSelectedPoint] = useState(sortedPointsTimeline[sortedPointsTimeline.indexOf(selectedPoint) - 1]);
   const [nextSelectedPoint, setNextSelectedPoint] = useState(sortedPointsTimeline[sortedPointsTimeline.indexOf(selectedPoint) + 1]);
   
@@ -158,7 +158,7 @@ const sortedPointsTimeline = serverTimelinePosts.timelinePosts.nodes
                                 </div>
                                   <Image src={yearData.featuredImage.node.mediaItemUrl} alt='' width={1000} height={1000} />
                                   <div className={`point-year-info-block ${decade > 1989 && 'point-year-info-block-shift'}`}>
-                                    <h3 className="point-year-info-block-year">{yearData.timeLineFields.year}</h3>
+                                    <h3 className="point-year-info-block-year">{yearData.title}</h3>
                                     <p className="point-year-info-block-title">{yearData.timeLineFields.subtitle}</p>
                                     <p className="point-year-info-block-text">{yearData.timeLineFields.text}</p>
                                   </div>

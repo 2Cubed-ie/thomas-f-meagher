@@ -30,7 +30,7 @@ query getPosts {
 }`
 
 export const GET_TIMELINE_POSTS = gql `query getTimelinePosts {
-  timelinePosts {
+  timelinePosts(first: 100) {
     nodes {
       id
       title
