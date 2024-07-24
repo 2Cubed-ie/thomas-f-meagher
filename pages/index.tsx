@@ -20,6 +20,19 @@ const GetAllPosts = gql`
   }
 `;
 
+const GetBg = gql`
+  {
+    page(id: "324", idType: DATABASE_ID) {
+      title
+      background_image {
+        backgroundImage {
+          mediaItemUrl
+        }
+      }
+    }
+  }
+`;
+
 // const data = wpgraphql.request(GetAllPosts);
 
 // const getAllPosts = async () => {
@@ -49,9 +62,10 @@ type Posts = {
 
 interface PostsPageProps {
   posts:One;
+  getBg: any
 }
 
-export default function Home({ posts: serverPosts }: PostsPageProps) {
+export default function Home({ posts: serverPosts, getBg: serverBg }: PostsPageProps) {
   const [postsList, setPostsList] = useState(serverPosts.posts.nodes);
   // const [screenWidth, setScreenWidth] = useState(0);
 
@@ -59,7 +73,7 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
   //   return setScreenWidth(window.screen.width);
   // }, [])
 
-  // console.log(screenWidth);
+  console.log("serverBg", serverBg.page.background_image.backgroundImage.mediaItemUrl);
 
   useEffect(() => {
     document.body.style.background = '#9dc3ea';
@@ -76,7 +90,14 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <main className={`${styles.main} first-page`}>
+      <main 
+        className={`${styles.main} first-page`} 
+        style={{
+          background: `url(${serverBg.page.background_image.backgroundImage.mediaItemUrl})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}>
         {/* {postsList.length === 0 ? (
           <p>loading</p>
         ) : (
@@ -107,8 +128,9 @@ export default function Home({ posts: serverPosts }: PostsPageProps) {
 
 export async function getServerSideProps({}: NextPageContext) {
   const posts: any = await wpgraphql.request(GetAllPosts);
+  const getBg: any = await wpgraphql.request(GetBg);
 
   return {
-    props: {posts},
+    props: {posts, getBg},
   }
 }
