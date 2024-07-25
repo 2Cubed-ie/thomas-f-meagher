@@ -25,17 +25,23 @@ import flag10 from '../../assets/flags/flag-10.svg';
 import flag11 from '../../assets/flags/flag-11.svg';
 import Image from 'next/image';
 import InfoBlock from '@/components/InfoBlock/InfoBlock';
-import { GET_FLAGS_DATA } from '@/gql/queries';
+import { GET_FEATURED_IMAGE_FOURTH_PAGE, GET_FEATURED_IMAGE_SIXTH_PAGE, GET_FLAGS_DATA } from '@/gql/queries';
 
 export async function getServerSideProps({}: NextPageContext) {
   const sliderData: any = await wpgraphql.request(GET_FLAGS_DATA);
+  const iconImageFourth: any = await wpgraphql.request(GET_FEATURED_IMAGE_FOURTH_PAGE);
+  const iconImageSixth: any = await wpgraphql.request(GET_FEATURED_IMAGE_SIXTH_PAGE);
 
   return {
-    props: {sliderData},
+    props: {sliderData, iconImageFourth, iconImageSixth},
   }
 }
 
-const Fifth = ({sliderData: serverSliderData}: any) => {
+const Fifth = ({
+  sliderData: serverSliderData,
+  iconImageFourth,
+  iconImageSixth
+}: any) => {
 
   const contentPageFifth = serverSliderData.flags.nodes;
   
@@ -127,8 +133,10 @@ const Fifth = ({sliderData: serverSliderData}: any) => {
       </div>
       
       <Footer 
-        prevLink={'/fourth'} prevImage={fourthPageIcon.src.toString()}
-        nextLink={'/sixth'} nextImage={sixthPageIcon.src.toString()}
+        prevLink={'/fourth'}
+        nextLink={'/sixth'}
+        prevImage={iconImageFourth.page.featuredImage.node.mediaItemUrl}
+        nextImage={iconImageSixth.page.featuredImage.node.mediaItemUrl}
       />
       </main>
       <div className="fifth-page-wrapper-info-block">

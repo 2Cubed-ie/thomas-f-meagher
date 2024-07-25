@@ -7,19 +7,21 @@ import CarouselEighth from '@/components/Carousel-eighth/CarouselEighth';
 import InfoBlock from '@/components/InfoBlock/InfoBlock';
 import { wpgraphql } from "@/lib/wpgrapghql";
 import { NextPageContext } from 'next';
-import { GET_POSTS } from '@/gql/queries';
+import { GET_FEATURED_IMAGE_NINTH_PAGE, GET_FEATURED_IMAGE_SEVENTH_PAGE, GET_POSTS } from '@/gql/queries';
 import { useEffect, useState } from 'react';
 import Ninth from '../ninth';
 
 export async function getServerSideProps({}: NextPageContext) {
   const posts: any = await wpgraphql.request(GET_POSTS);
+  const iconImageSeventh: any = await wpgraphql.request(GET_FEATURED_IMAGE_SEVENTH_PAGE);
+  const iconImageNinth: any = await wpgraphql.request(GET_FEATURED_IMAGE_NINTH_PAGE);
 
   return {
-    props: {posts},
+    props: {posts, iconImageSeventh, iconImageNinth},
   }
 }
 
-const Eighth = ({posts: serverPosts}: any) => {
+const Eighth = ({posts: serverPosts, iconImageSeventh, iconImageNinth}: any) => {
   const [currentMagazine, setCurrentMagazine] = useState();
 
   useEffect(() => {
@@ -61,8 +63,10 @@ const Eighth = ({posts: serverPosts}: any) => {
       }
 
         <Footer 
-          prevLink={'/seventh'} prevImage={seventhPageIcon.src.toString()}
-          nextLink={'/tenth'} nextImage={tenthPageIcon.src.toString()}
+          prevLink={'/seventh'}
+          nextLink={'/tenth'}
+          prevImage={iconImageSeventh.page.featuredImage.node.mediaItemUrl}
+          nextImage={iconImageNinth.page.featuredImage.node.mediaItemUrl}
         />
       </main>
     </>

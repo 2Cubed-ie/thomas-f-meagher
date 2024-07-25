@@ -7,19 +7,25 @@ import pauseIcon from '../../assets/pause-icon.svg';
 import Header from '@/components/Header/Header';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { GET_SIXTH_PAGE_DATA } from '@/gql/queries';
+import { GET_FEATURED_IMAGE_FIFTH_PAGE, GET_FEATURED_IMAGE_SECOND_PAGE, GET_FEATURED_IMAGE_SEVENTH_PAGE, GET_SIXTH_PAGE_DATA } from '@/gql/queries';
 import { NextPageContext } from 'next';
 import { wpgraphql } from '@/lib/wpgrapghql';
 
 export async function getServerSideProps({}: NextPageContext) {
   const data: any = await wpgraphql.request(GET_SIXTH_PAGE_DATA);
+  const iconImageFifth: any = await wpgraphql.request(GET_FEATURED_IMAGE_FIFTH_PAGE);
+  const iconImageSeventh: any = await wpgraphql.request(GET_FEATURED_IMAGE_SEVENTH_PAGE);
 
   return {
-    props: {data},
+    props: {data, iconImageFifth, iconImageSeventh},
   }
 }
 
-const Sixth = ({data: serverData}: any) => {
+const Sixth = ({
+  data: serverData,
+  iconImageFifth,
+  iconImageSeventh
+}: any) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<any>(null);
 
@@ -94,8 +100,10 @@ const Sixth = ({data: serverData}: any) => {
       </div>
       
       <Footer 
-        prevLink={'/fifth'} prevImage={fifthPageIcon.src.toString()}
-        nextLink={'/seventh'} nextImage={seventhPageIcon.src.toString()}
+        prevLink={'/fifth'} 
+        nextLink={'/seventh'}
+        prevImage={iconImageFifth.page.featuredImage.node.mediaItemUrl}
+        nextImage={iconImageSeventh.page.featuredImage.node.mediaItemUrl}
       />
       </main>
     </>

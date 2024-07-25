@@ -6,19 +6,25 @@ import Header from '@/components/Header/Header';
 import Image from 'next/image';
 import { wpgraphql } from '@/lib/wpgrapghql';
 import { NextPageContext } from 'next';
-import { GET_SEVENTH_PAGE_DATA } from '@/gql/queries';
+import { GET_FEATURED_IMAGE_EIGHTH_PAGE, GET_FEATURED_IMAGE_SIXTH_PAGE, GET_SEVENTH_PAGE_DATA } from '@/gql/queries';
 import DOMPurify from 'isomorphic-dompurify';
 import { useEffect } from 'react';
 
 export async function getServerSideProps({}: NextPageContext) {
   const data: any = await wpgraphql.request(GET_SEVENTH_PAGE_DATA);
+  const iconImageSixth: any = await wpgraphql.request(GET_FEATURED_IMAGE_SIXTH_PAGE);
+  const iconImageEighth: any = await wpgraphql.request(GET_FEATURED_IMAGE_EIGHTH_PAGE);
 
   return {
-    props: {data},
+    props: {data, iconImageSixth, iconImageEighth},
   }
 }
 
-const Seventh = ({data: serverData}: any) => {
+const Seventh = ({
+  data: serverData,
+  iconImageSixth,
+  iconImageEighth
+}: any) => {
   useEffect(() => {
     document.body.style.background = '#096723';
   })
@@ -68,8 +74,10 @@ const Seventh = ({data: serverData}: any) => {
         </div>
         
         <Footer 
-          prevLink={'/sixth'} prevImage={sixthPageIcon.src.toString()}
-          nextLink={'/eighth'} nextImage={eighthPageIcon.src.toString()}
+          prevLink={'/sixth'}
+          nextLink={'/eighth'}
+          prevImage={iconImageSixth.page.featuredImage.node.mediaItemUrl}
+          nextImage={iconImageEighth.page.featuredImage.node.mediaItemUrl}
         />
       </main>
     </>

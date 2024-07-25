@@ -28,17 +28,23 @@ import CarouselSecond from '@/components/Carousel-second/CarouselSecond';
 import CarouselThird from '@/components/CarouselThird/CarouselThird';
 import Link from 'next/link';
 import Header from '@/components/Header/Header';
-import { GET_TIMELINE_POSTS } from '@/gql/queries';
+import { GET_FEATURED_IMAGE_FOURTH_PAGE, GET_TIMELINE_POSTS } from '@/gql/queries';
+import {GET_FEATURED_IMAGE_SECOND_PAGE} from '@/gql/queries';
 
 export async function getServerSideProps({}: NextPageContext) {
   const timelinePosts: any = await wpgraphql.request(GET_TIMELINE_POSTS);
+  const iconImageSecond: any = await wpgraphql.request(GET_FEATURED_IMAGE_SECOND_PAGE);
+  const iconImageFourth: any = await wpgraphql.request(GET_FEATURED_IMAGE_FOURTH_PAGE);
 
   return {
-    props: {timelinePosts},
+    props: {timelinePosts, iconImageSecond, iconImageFourth},
   }
 }
 
-export default function Third({ timelinePosts: serverTimelinePosts }: any) {
+export default function Third({ 
+  timelinePosts: serverTimelinePosts, 
+  iconImageSecond: serverSecondIconImage,
+  iconImageFourth: serverFourthIconImage }: any) {
 
 const sortedPointsTimeline = serverTimelinePosts.timelinePosts.nodes
     .map((post: any) => Number(post.timeLineFields.year))
@@ -209,8 +215,8 @@ const sortedPointsTimeline = serverTimelinePosts.timelinePosts.nodes
         <Footer 
           prevLink={'/second'} 
           nextLink={'/fourth'}
-          prevImage={secondPageIcon.src.toString()}
-          nextImage={fourthPageIcon.src.toString()}
+          prevImage={serverSecondIconImage.page.featuredImage.node.mediaItemUrl}
+          nextImage={serverFourthIconImage.page.featuredImage.node.mediaItemUrl}
         />
       </main>
     </>

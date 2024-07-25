@@ -11,17 +11,23 @@ import fifthPageIcon from '../../assets/fifthPageIcon.png';
 import Header from '@/components/Header/Header';
 import InfoBlock from '@/components/InfoBlock/InfoBlock';
 
-import { GET_FOURTH_PAGE_DATA } from '@/gql/queries';
+import { GET_FEATURED_IMAGE_FIFTH_PAGE, GET_FEATURED_IMAGE_THIRD_PAGE, GET_FOURTH_PAGE_DATA } from '@/gql/queries';
 
 export async function getServerSideProps({}: NextPageContext) {
   const sliderData: any = await wpgraphql.request(GET_FOURTH_PAGE_DATA);
+  const iconImageThird: any = await wpgraphql.request(GET_FEATURED_IMAGE_THIRD_PAGE);
+  const iconImageFifth: any = await wpgraphql.request(GET_FEATURED_IMAGE_FIFTH_PAGE);
 
   return {
-    props: {sliderData},
+    props: {sliderData, iconImageThird, iconImageFifth},
   }
 }
 
-export default function Fourth({sliderData: serverSliderData}: any) {
+export default function Fourth({
+  sliderData: serverSliderData,
+  iconImageThird: serverThirdImage,
+  iconImageFifth: serverFifthImage,
+}: any) {
 
   const famousFaces = serverSliderData.page.fourthPage.listFamousPeopleAboutFlag; 
   const [index, setIndex] = useState(0);
@@ -177,8 +183,10 @@ export default function Fourth({sliderData: serverSliderData}: any) {
         </div>
         
         <Footer 
-          prevLink={'/third'} prevImage={thirdPageIcon.src.toString()}
-          nextLink={'fifth'} nextImage={fifthPageIcon.src.toString()}
+          prevLink={'/third'}
+          nextLink={'fifth'} 
+          prevImage={serverThirdImage.page.featuredImage.node.mediaItemUrl}
+          nextImage={serverFifthImage.page.featuredImage.node.mediaItemUrl}
         />
       </main>
     </>
