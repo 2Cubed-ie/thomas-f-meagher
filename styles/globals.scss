@@ -268,11 +268,15 @@ a {
   flex-direction: column;
 
   &-flags {
-    max-width: 70%;
+    width: 70%;
     margin: 0 auto;
     background-color: #ffffff;
     max-height: 70%;
     padding: 3vw;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 15em;
 
     &-navigarion {
       display: grid;
@@ -311,6 +315,7 @@ a {
   
   &-left img {
     width: 100%;
+    object-fit: contain;
   }
 
   &-left, &-right {
@@ -434,11 +439,11 @@ a {
 
 .sixth-page-video-block-caption {
   position: absolute;
-  width: 22vw;
+  width: 26vw;
   font-size: 1.2vw;
   background: #e46e24;
   color: white;
-  height: 22vw;
+  height: 26vw;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -447,6 +452,12 @@ a {
   border-radius: 50%;
   text-transform: uppercase;
   right: 7vw;
+
+  & p {
+    overflow: auto;
+    max-height: 12vw;
+    text-transform: none;
+  }
 }
 
 .seventh-page {
@@ -1055,6 +1066,9 @@ img.point-icon {
 .fifth-page-title {
   display: grid;
   grid-template-columns: 1fr;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .fifth-page-title h3 {
