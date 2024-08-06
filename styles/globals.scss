@@ -154,6 +154,11 @@ a {
   align-items: center;
 }
 
+.seventh-page .footer-block {
+  position: relative;
+  top: -126px;
+}
+
 .footer-block-right,
 .footer-block-left {
   position: relative;
@@ -344,12 +349,13 @@ a {
   background-color: #ffffff;
   background-image: url('../assets//bg-p-6.png');
   background-repeat: no-repeat;
+  background-position: left -54px;
 }
 
 .sixth-page-wrapper-video {
   position: relative;
-  width: 40vw;
-  height: 40vw;
+  width: 34vw;
+  height: 34vw;
   border-radius: 50%;
   overflow: hidden;
   left: 8vw;
@@ -410,7 +416,7 @@ a {
 
 .video-start-stop-btn-wrapper {
   position: absolute;
-  bottom: 15vw;
+  bottom: 12vw;
   right: 9vw;
   display: grid;
   grid-template-columns: 1fr 15vw;
@@ -482,7 +488,7 @@ a {
 
 .seventh-page-main-left-img {
   position: relative;
-  top: -5vw;
+  top: -2vw;
   left: 5vw;
 }
 
@@ -498,8 +504,8 @@ a {
   display: flex;
   align-items: center;
   position: relative;
-  bottom: 30vw;
-  left: 20vw;
+  bottom: 26vw;
+  left: 18vw;
 }
 
 .seventh-page-main-right {
@@ -572,13 +578,13 @@ a {
   }
 
   &-keyboard {
-    height: 850px;
-    width: 80%;
+    height: 637px;
+    width: 70%;
     background-color: #000000;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 1vw;
-    padding: 1.9vw 0.9vw;
+    padding: 0.9vw 0.9vw;
   }
   &-keyboard-keys {
     display: flex;
@@ -592,7 +598,7 @@ a {
     align-items: center;
     font-size: 1.5vw;
     background: rgba(255, 255, 255, 0.12);
-    height: 150px;
+    height: 120px;
     width: 100%;
     position: relative;
   }
