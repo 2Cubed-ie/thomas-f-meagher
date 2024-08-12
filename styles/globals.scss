@@ -332,6 +332,7 @@ a {
   color: #096723;
   font-size: 1.3vw;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .fifth-page-banner-rigth-text {
@@ -506,6 +507,12 @@ a {
   position: relative;
   bottom: 26vw;
   left: 18vw;
+
+  & p {
+    overflow: auto;
+    max-height: 8vw;
+    text-transform: none;
+  }
 }
 
 .seventh-page-main-right {
@@ -1075,6 +1082,7 @@ img.point-icon {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  top: 1vw;
 }
 
 .fifth-page-title h3 {
