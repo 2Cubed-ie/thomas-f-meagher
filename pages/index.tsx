@@ -73,7 +73,7 @@ export default function Home({ posts: serverPosts, getBg: serverBg }: PostsPageP
   //   return setScreenWidth(window.screen.width);
   // }, [])
 
-  console.log("serverBg", serverBg.page.background_image.backgroundImage.mediaItemUrl);
+  // console.log("serverBg", serverBg.page.background_image.backgroundImage.mediaItemUrl);
 
   useEffect(() => {
     document.body.style.background = '#9dc3ea';

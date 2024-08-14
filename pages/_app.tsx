@@ -9,6 +9,8 @@ import { useRef } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
   const componentRef = useRef(null);
+  console.log('%cDisplay size 3280*1587', 
+    'color: #e46f25; font-size: 18px; border: 2px solid #e46f25; padding: 5px;');
   return (
     <TransitionGroup>
       <CSSTransition
